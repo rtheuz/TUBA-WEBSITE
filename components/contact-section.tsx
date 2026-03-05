@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, MessageCircle, Send } from 'lucide-react'
+import { Mail, Phone, MapPin, MessageCircle, Send, Paperclip } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 
 export function ContactSection() {
@@ -12,20 +12,31 @@ export function ContactSection() {
     phone: '',
     description: '',
   })
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedFile(e.target.files?.[0] ?? null)
+  }
+
   const buildWhatsAppMessage = () => {
+    const fileNote = selectedFile
+      ? `\n\nArquivo para anexar: ${selectedFile.name}\n(Por favor, envie o arquivo diretamente no chat do WhatsApp.)`
+      : ''
     return encodeURIComponent(
-      `Olá! Gostaria de solicitar um orçamento.\n\nNome: ${form.name}\nEmail: ${form.email}\nTelefone: ${form.phone}\n\nDescrição do Projeto:\n${form.description}`
+      `Olá! Gostaria de solicitar um orçamento.\n\nNome: ${form.name}\nEmail: ${form.email}\nTelefone: ${form.phone}\n\nDescrição do Projeto:\n${form.description}${fileNote}`
     )
   }
 
   const buildEmailBody = () => {
+    const fileNote = selectedFile
+      ? `\n\nArquivo para anexar: ${selectedFile.name}\n(Obs.: Por favor, anexe o arquivo mencionado ao enviar este email.)`
+      : ''
     return encodeURIComponent(
-      `Nome: ${form.name}\nEmail: ${form.email}\nTelefone: ${form.phone}\n\nDescrição do Projeto:\n${form.description}`
+      `Nome: ${form.name}\nEmail: ${form.email}\nTelefone: ${form.phone}\n\nDescrição do Projeto:\n${form.description}${fileNote}`
     )
   }
 
@@ -98,6 +109,21 @@ export function ContactSection() {
                   </div>
                 </div>
               </div>
+            </div>
+
+            {/* Google Maps Embed */}
+            <div className="pt-2">
+              <iframe
+                src="https://maps.google.com/maps?q=Estr.+dos+Alvarengas,+4101+-+Galp%C3%A3o+2,+Assun%C3%A7%C3%A3o,+S%C3%A3o+Bernardo+do+Campo+-+SP,+09850-550&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="224"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="rounded-lg border border-gray-700"
+                title="Localização TUBA Ferramentaria"
+              />
             </div>
 
             <div className="pt-4">
@@ -178,6 +204,26 @@ export function ContactSection() {
                       rows={4}
                       className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-3 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 text-sm resize-none"
                     />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-1.5">
+                      <span className="flex items-center gap-1.5">
+                        <Paperclip className="h-4 w-4" />
+                        Anexar Arquivo (opcional)
+                      </span>
+                    </label>
+                    <label className="flex items-center gap-3 w-full bg-gray-700/50 border border-gray-600 rounded-lg px-3 py-2.5 cursor-pointer hover:border-yellow-400 focus-within:border-yellow-400 focus-within:ring-1 focus-within:ring-yellow-400 transition-colors text-sm">
+                      <span className="text-gray-400 truncate flex-1">
+                        {selectedFile ? selectedFile.name : 'Desenho, PDF, imagem...'}
+                      </span>
+                      <span className="text-yellow-400 text-xs font-medium shrink-0">Escolher</span>
+                      <input
+                        type="file"
+                        accept=".pdf,.png,.jpg,.jpeg,.svg,.dxf,.dwg"
+                        onChange={handleFileChange}
+                        className="sr-only"
+                      />
+                    </label>
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-3 pt-2">

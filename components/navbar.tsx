@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Menu, X, Wrench } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const navLinks = [
@@ -34,10 +34,9 @@ export function Navbar() {
           {/* Logo */}
           <a href="#inicio" className="flex items-center gap-3 group">
             <div className="p-2 rounded-lg transition-colors" style={{ backgroundColor: '#FFF400' }}>
-              <Wrench className="h-8 w-8 text-gray-950" />
+              <img src="https://i.imgur.com/aHxlYK9.png" alt="Ícone TUBA" className="h-8 w-8 object-contain" />
             </div>
-            <span className="text-white font-extrabold text-3xl tracking-wider">
-              TUBA</span>
+            <img src="https://i.imgur.com/o8GQOEV.png" alt="TUBA" className="h-10 w-auto object-contain" />
           </a>
 
           {/* Desktop Navigation */}
