@@ -5,34 +5,34 @@ import Image from 'next/image'
 
 const portfolioImages = [
   {
-    src: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebb6525?w=600',
-    alt: 'Fabricação Industrial',
-    title: 'Fabricação Industrial',
+    src: 'https://i.imgur.com/7ONdmgy.png',
+    alt: 'TRUCK CEG',
+    title: 'TRUCK CEG',
   },
   {
-    src: 'https://images.unsplash.com/photo-1565034946487-077786996e27?w=600',
-    alt: 'Processo de Soldagem',
-    title: 'Processo de Soldagem',
+    src: 'https://i.imgur.com/4oqGHVP.jpeg',
+    alt: 'TECNIGRAV ',
+    title: 'TECNIGRAV', 
   },
   {
-    src: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600',
-    alt: 'Manufatura de Precisão',
-    title: 'Manufatura de Precisão',
+    src: 'https://i.imgur.com/ATnDIYt.jpeg',
+    alt: 'VETTORE',
+    title: 'VETTORE',
   },
   {
-    src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600',
-    alt: 'Fábrica Moderna',
-    title: 'Fábrica Moderna',
+    src: 'https://i.imgur.com/IDkEq5o.png',
+    alt: 'HENRY PEÇAS',
+    title: 'HENRY PEÇAS',
   },
   {
-    src: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebb6525?w=600',
-    alt: 'Corte a Laser',
-    title: 'Corte a Laser',
+    src: 'https://i.imgur.com/laBtZnP.jpeg',
+    alt: 'E.C ALVES',
+    title: 'E.C ALVES',
   },
   {
-    src: 'https://images.unsplash.com/photo-1565034946487-077786996e27?w=600',
-    alt: 'Dobra de Chapas',
-    title: 'Dobra de Chapas',
+    src: 'https://i.imgur.com/8kRJsJE.jpeg',
+    alt: 'TUBA',
+    title: 'TUBA',
   },
 ]
 
