@@ -22,7 +22,7 @@ export function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <span className="inline-block bg-yellow-400/10 text-yellow-300 border border-yellow-400/20 rounded-full px-3 py-1 text-sm font-medium mb-6">
+                <span className="inline-block bg-yellow-400/10 text-white border border-yellow-400/20 rounded-full px-3 py-1 text-sm font-medium mb-6">
                   Fundada em 2009 · São Bernardo do Campo - SP
                 </span>
               </motion.div>
@@ -34,7 +34,7 @@ export function HeroSection() {
                 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight"
               >
                 TUBA{' '}
-                <span className="bg-gradient-to-r from-yellow-300 to-yellow-500 bg-clip-text text-transparent">
+                <span className="text-white">
                   FERRAMENTARIA
                 </span>
               </motion.h1>

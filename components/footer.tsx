@@ -1,4 +1,4 @@
-import { Wrench, Mail, Phone, MapPin, MessageCircle } from 'lucide-react'
+import { Mail, Phone, MapPin, MessageCircle } from 'lucide-react'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -11,11 +11,9 @@ export function Footer() {
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2 mb-4">
               <div className="p-2 rounded-lg" style={{ backgroundColor: '#FFF400' }}>
-                <Wrench className="h-7 w-7 text-gray-950" />
+                <img src="https://i.imgur.com/aHxlYK9.png" alt="Ícone TUBA" className="h-7 w-7 object-contain" />
               </div>
-              {/*<span className="text-white font-bold text-xl tracking-wider">
-                TUBA
-              </span>*/}
+              <img src="https://i.imgur.com/o8GQOEV.png" alt="TUBA" className="h-10 w-auto object-contain" />
             </div>
             <p className="text-gray-400 text-sm leading-relaxed max-w-sm mb-6">
               TUBA FERRAMENTARIA LTDA — Soluções completas em metalurgia e ferramentaria desde 2009. 
