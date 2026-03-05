@@ -27,25 +27,11 @@ const services = [
     bg: 'bg-orange-400/10',
   },
   {
-    icon: Wrench,
-    title: 'Projetos Sob Medida',
-    description: 'Peças sob especificação para indústrias automotiva, arquitetura e comunicação visual.',
-    color: 'text-green-400',
-    bg: 'bg-green-400/10',
-  },
-  {
     icon: Factory,
     title: 'Caldeiraria e Montagens',
     description: 'Incluindo usinagem, tornearia e outros processos de fabricação metálica de alta precisão.',
     color: 'text-purple-400',
     bg: 'bg-purple-400/10',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Controle de Qualidade',
-    description: 'Cada peça é revisada criteriosamente para garantir qualidade e segurança antes da entrega.',
-    color: 'text-cyan-400',
-    bg: 'bg-cyan-400/10',
   },
 ]
 
