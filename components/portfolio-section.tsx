@@ -10,12 +10,12 @@ const portfolioImages = [
     title: 'TRUCK CEG',
   },
   {
-    src: 'https://i.imgur.com/4oqGHVP.jpeg',
+    src: 'https://i.imgur.com/DhQZtmV.png',
     alt: 'TECNIGRAV ',
     title: 'TECNIGRAV', 
   },
   {
-    src: 'https://i.imgur.com/ATnDIYt.jpeg',
+    src: 'https://i.imgur.com/MVTqmJO.png',
     alt: 'VETTORE',
     title: 'VETTORE',
   },
@@ -25,12 +25,12 @@ const portfolioImages = [
     title: 'HENRY PEÇAS',
   },
   {
-    src: 'https://i.imgur.com/laBtZnP.jpeg',
+    src: 'https://i.imgur.com/w5atK2E.png',
     alt: 'E.C ALVES',
     title: 'E.C ALVES',
   },
   {
-    src: 'https://i.imgur.com/8kRJsJE.jpeg',
+    src: 'https://i.imgur.com/1vWRRWQ.png',
     alt: 'TUBA',
     title: 'TUBA',
   },
