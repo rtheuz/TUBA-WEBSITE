@@ -1,14 +1,35 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 interface CinematicIntroProps {
   onComplete: () => void
 }
 
+// Seeded pseudo-random number generator for deterministic values
+function seededRandom(seed: number) {
+  const x = Math.sin(seed) * 10000
+  return x - Math.floor(x)
+}
+
 export function CinematicIntro({ onComplete }: CinematicIntroProps) {
   const [visible, setVisible] = useState(true)
+
+  // Pre-generate all random values so they are stable across renders and SSR/hydration
+  const particles = useMemo(() => {
+    return Array.from({ length: 18 }, (_, i) => ({
+      width: seededRandom(i * 7 + 1) * 4 + 2,
+      height: seededRandom(i * 7 + 2) * 4 + 2,
+      left: seededRandom(i * 7 + 3) * 100,
+      top: seededRandom(i * 7 + 4) * 100,
+      moveY: -(seededRandom(i * 7 + 5) * 80 + 40),
+      moveX: (seededRandom(i * 7 + 6) - 0.5) * 60,
+      duration: seededRandom(i * 7 + 7) * 1.5 + 1,
+      delay: seededRandom(i * 7 + 8) * 2,
+      repeatDelay: seededRandom(i * 7 + 9) * 1,
+    }))
+  }, [])
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -27,33 +48,33 @@ export function CinematicIntro({ onComplete }: CinematicIntroProps) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.6 }}
           className="fixed inset-0 z-[9999] flex flex-col items-center justify-center"
-          style={{ backgroundColor: '#030712' }}
+          style={{ backgroundColor: '#000000' }}
         >
           {/* Spark particles */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {[...Array(18)].map((_, i) => (
+            {particles.map((p, i) => (
               <motion.div
                 key={i}
                 className="absolute rounded-full"
                 style={{
-                  width: Math.random() * 4 + 2,
-                  height: Math.random() * 4 + 2,
+                  width: p.width,
+                  height: p.height,
                   backgroundColor: '#FFF400',
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
+                  left: `${p.left}%`,
+                  top: `${p.top}%`,
                 }}
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{
                   opacity: [0, 1, 0],
                   scale: [0, 1.5, 0],
-                  y: [0, -(Math.random() * 80 + 40)],
-                  x: [(Math.random() - 0.5) * 60],
+                  y: [0, p.moveY],
+                  x: [p.moveX],
                 }}
                 transition={{
-                  duration: Math.random() * 1.5 + 1,
-                  delay: Math.random() * 2,
+                  duration: p.duration,
+                  delay: p.delay,
                   repeat: Infinity,
-                  repeatDelay: Math.random() * 1,
+                  repeatDelay: p.repeatDelay,
                 }}
               />
             ))}

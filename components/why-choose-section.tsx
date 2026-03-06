@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { TextShimmer } from '@/components/ui/text-shimmer'
 
 const reasons = [
   {
@@ -44,7 +45,7 @@ const reasons = [
 
 export function WhyChooseSection() {
   return (
-    <section className="py-20 bg-gray-950">
+    <section className="py-20 bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -73,7 +74,14 @@ export function WhyChooseSection() {
               <Card className="bg-gray-800/50 border-gray-700 hover:border-yellow-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-400/10 h-full">
                 <CardHeader>
                   <div className="text-4xl mb-4">{reason.emoji}</div>
-                  <CardTitle className="text-white text-lg leading-snug">{reason.title}</CardTitle>
+                  <CardTitle className="text-lg leading-snug">
+                    <TextShimmer
+                      duration={1.5}
+                      className="text-lg font-medium [--base-color:theme(colors.yellow.300)] [--base-gradient-color:theme(colors.yellow.100)] dark:[--base-color:theme(colors.yellow.300)] dark:[--base-gradient-color:theme(colors.yellow.100)]"
+                    >
+                      {reason.title}
+                    </TextShimmer>
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-gray-400 text-sm leading-relaxed">

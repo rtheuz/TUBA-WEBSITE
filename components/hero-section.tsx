@@ -9,7 +9,7 @@ import { AuroraBackground } from '@/components/ui/aurora-background'
 
 export function HeroSection() {
   return (
-    <AuroraBackground className="min-h-screen bg-gray-950">
+    <AuroraBackground className="min-h-screen bg-black">
       <div id="inicio" className="relative w-full flex items-center justify-center min-h-screen overflow-hidden">
         <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="amber" />
 
