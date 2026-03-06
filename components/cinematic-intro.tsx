@@ -59,7 +59,7 @@ export function CinematicIntro({ onComplete }: CinematicIntroProps) {
                 style={{
                   width: p.width,
                   height: p.height,
-                  backgroundColor: '#ffffff',
+                  backgroundColor: '#5487ff',
                   left: `${p.left}%`,
                   top: `${p.top}%`,
                 }}
@@ -83,7 +83,7 @@ export function CinematicIntro({ onComplete }: CinematicIntroProps) {
           {/* Yellow glow */}
           <div
             className="absolute w-96 h-96 rounded-full blur-2xl opacity-40"
-            style={{ backgroundColor: '#ecd103' }}
+            style={{ backgroundColor: '#5487ff' }}
           />
 
           {/* Icon */}
@@ -92,7 +92,7 @@ export function CinematicIntro({ onComplete }: CinematicIntroProps) {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
             className="p-4 rounded-2xl mb-6 relative z-10"
-            style={{ backgroundColor: '#ecd103' }}
+            style={{ backgroundColor: '#ffffff' }}
           >
             <img
               src="https://i.imgur.com/aHxlYK9.png"
@@ -131,7 +131,7 @@ export function CinematicIntro({ onComplete }: CinematicIntroProps) {
             animate={{ scaleX: 1 }}
             transition={{ duration: 2.8, delay: 0.2, ease: 'linear' }}
             className="absolute bottom-0 left-0 h-1 origin-left"
-            style={{ backgroundColor: '#2cdd00', width: '100%' }}
+            style={{ backgroundColor: '#5487ff', width: '100%' }}
           />
         </motion.div>
       )}
