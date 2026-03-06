@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Zap, Layers, Flame, Wrench, Factory, ShieldCheck } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { TextShimmer } from '@/components/ui/text-shimmer'
 
 const services = [
   {
@@ -37,7 +38,7 @@ const services = [
 
 export function ServicesSection() {
   return (
-    <section id="servicos" className="py-20 bg-gray-900">
+    <section id="servicos" className="py-20 bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -71,7 +72,14 @@ export function ServicesSection() {
                   <div className={`w-12 h-12 rounded-lg ${service.bg} flex items-center justify-center mb-4`}>
                     <service.icon className={`h-6 w-6 ${service.color}`} />
                   </div>
-                  <CardTitle className="text-white text-xl">{service.title}</CardTitle>
+                  <CardTitle className="text-xl">
+                    <TextShimmer
+                      duration={1.2}
+                      className="text-xl font-medium [--base-color:theme(colors.yellow.300)] [--base-gradient-color:theme(colors.yellow.100)] dark:[--base-color:theme(colors.yellow.300)] dark:[--base-gradient-color:theme(colors.yellow.100)]"
+                    >
+                      {service.title}
+                    </TextShimmer>
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-gray-400 text-sm leading-relaxed">

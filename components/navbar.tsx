@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { ThemeToggle } from '@/components/ui/theme-toggle'
 
 const navLinks = [
   { href: '#inicio', label: 'Início' },
@@ -26,7 +27,7 @@ export function Navbar() {
     <header
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        scrolled ? 'bg-gray-950/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+        scrolled ? 'bg-black/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -52,8 +53,9 @@ export function Navbar() {
             ))}
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden md:flex">
+          {/* Theme Toggle + CTA Button */}
+          <div className="hidden md:flex items-center gap-3">
+            <ThemeToggle />
             <a
               href="https://wa.me/5511912854204"
               target="_blank"
@@ -78,7 +80,7 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-gray-950/98 backdrop-blur-md border-t border-gray-800">
+        <div className="md:hidden bg-black/98 backdrop-blur-md border-t border-gray-800">
           <div className="px-4 py-4 space-y-3">
             {navLinks.map((link) => (
               <a
@@ -99,6 +101,9 @@ export function Navbar() {
             >
               Solicite Orçamento
             </a>
+            <div className="flex justify-center mt-4">
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       )}
