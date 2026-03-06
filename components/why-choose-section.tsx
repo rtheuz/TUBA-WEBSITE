@@ -55,9 +55,9 @@ export function WhyChooseSection() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            🏆 Por que escolher a <span className="text-yellow-300">Tuba?</span>
+            🏆 Por que escolher a <span className="text-blue-300">Tuba?</span>
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <p className="text-white-100 max-w-2xl mx-auto">
             Conheça os diferenciais que fazem da TUBA FERRAMENTARIA a escolha certa para o seu projeto.
           </p>
         </motion.div>
@@ -71,20 +71,20 @@ export function WhyChooseSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Card className="bg-gray-800/50 border-gray-700 hover:border-yellow-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-400/10 h-full">
+              <Card className="bg-gray-800/50 border-gray-700 hover:border-blue-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-400/10 h-full">
                 <CardHeader>
                   <div className="text-4xl mb-4">{reason.emoji}</div>
                   <CardTitle className="text-lg leading-snug">
                     <TextShimmer
                       duration={1.5}
-                      className="text-lg font-medium [--base-color:theme(colors.yellow.300)] [--base-gradient-color:theme(colors.yellow.100)] dark:[--base-color:theme(colors.yellow.300)] dark:[--base-gradient-color:theme(colors.yellow.100)]"
+                      className="text-lg font-medium [--base-color:theme(colors.blue.300)] [--base-gradient-color:theme(colors.blue.100)] dark:[--base-color:theme(colors.blue.300)] dark:[--base-gradient-color:theme(colors.blue.100)]"
                     >
                       {reason.title}
                     </TextShimmer>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-gray-400 text-sm leading-relaxed">
+                  <CardDescription className="text-gray-300 text-sm leading-relaxed">
                     {reason.description}
                   </CardDescription>
                 </CardContent>

@@ -50,13 +50,13 @@ export function ContactSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="inline-block bg-yellow-400/10 text-yellow-300 border border-yellow-400/20 rounded-full px-3 py-1 text-sm font-medium mb-4">
+          <span className="inline-block bg-blue-400/10 text-blue-300 border border-blue-400/20 rounded-full px-3 py-1 text-sm font-medium mb-4">
             Fale conosco
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Solicite um <span className="text-yellow-300">Orçamento</span>
+            Solicite um <span className="text-blue-300">Orçamento</span>
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <p className="text-gray-300 max-w-2xl mx-auto">
             Entre em contato conosco e receba um orçamento personalizado para o seu projeto.
           </p>
         </motion.div>
@@ -74,33 +74,33 @@ export function ContactSection() {
               <h3 className="text-xl font-semibold text-white mb-6">Informações de Contato</h3>
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
-                  <div className="p-2.5 rounded-lg bg-yellow-400/10 text-yellow-300">
+                  <div className="p-2.5 rounded-lg bg-blue-400/10 text-blue-300">
                     <Mail className="h-5 w-5" />
                   </div>
                   <div>
-                    <div className="text-gray-400 text-sm">Email</div>
-                    <a href="mailto:tubaferram@gmail.com" className="text-white hover:text-yellow-300 transition-colors">
+                    <div className="text-gray-300 text-sm">Email</div>
+                    <a href="mailto:tubaferram@gmail.com" className="text-white hover:text-blue-300 transition-colors">
                       tubaferram@gmail.com
                     </a>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="p-2.5 rounded-lg bg-yellow-400/10 text-yellow-300">
+                  <div className="p-2.5 rounded-lg bg-blue-400/10 text-blue-300">
                     <Phone className="h-5 w-5" />
                   </div>
                   <div>
-                    <div className="text-gray-400 text-sm">WhatsApp / Telefone</div>
-                    <a href="https://wa.me/5511912854204" target="_blank" rel="noopener noreferrer" className="text-white hover:text-yellow-300 transition-colors">
+                    <div className="text-gray-300 text-sm">WhatsApp / Telefone</div>
+                    <a href="https://wa.me/5511912854204" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-300 transition-colors">
                       (11) 91285-4204
                     </a>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="p-2.5 rounded-lg bg-yellow-400/10 text-yellow-300">
+                  <div className="p-2.5 rounded-lg bg-blue-400/10 text-blue-300">
                     <MapPin className="h-5 w-5" />
                   </div>
                   <div>
-                    <div className="text-gray-400 text-sm">Endereço</div>
+                    <div className="text-gray-300 text-sm">Endereço</div>
                     <div className="text-white text-sm">
                       Estr. dos Alvarengas, 4101 - Galpão 2<br />
                       Assunção, São Bernardo do Campo - SP<br />
@@ -140,7 +140,7 @@ export function ContactSection() {
                 </a>
                 <a
                   href="mailto:tubaferram@gmail.com"
-                  className="flex items-center gap-2 bg-yellow-400/10 hover:bg-yellow-400/20 border border-yellow-400/20 text-yellow-300 px-4 py-2 rounded-lg text-sm transition-colors"
+                  className="flex items-center gap-2 bg-blue-400/10 hover:bg-blue-400/20 border border-blue-400/20 text-blue-300 px-4 py-2 rounded-lg text-sm transition-colors"
                 >
                   <Mail className="h-4 w-4" />
                   Email
@@ -168,7 +168,7 @@ export function ContactSection() {
                         value={form.name}
                         onChange={handleChange}
                         placeholder="Seu nome completo"
-                        className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-3 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 text-sm"
+                        className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-3 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-sm"
                       />
                     </div>
                     <div>
@@ -179,7 +179,7 @@ export function ContactSection() {
                         value={form.phone}
                         onChange={handleChange}
                         placeholder="(11) 99999-9999"
-                        className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-3 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 text-sm"
+                        className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-3 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-sm"
                       />
                     </div>
                   </div>
@@ -191,7 +191,7 @@ export function ContactSection() {
                       value={form.email}
                       onChange={handleChange}
                       placeholder="seu@email.com"
-                      className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-3 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 text-sm"
+                      className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-3 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-sm"
                     />
                   </div>
                   <div>
@@ -202,7 +202,7 @@ export function ContactSection() {
                       onChange={handleChange}
                       placeholder="Descreva seu projeto, materiais, quantidades e especificações..."
                       rows={4}
-                      className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-3 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 text-sm resize-none"
+                      className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-3 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-sm resize-none"
                     />
                   </div>
                   <div>
@@ -212,11 +212,11 @@ export function ContactSection() {
                         Anexar Arquivo (opcional)
                       </span>
                     </label>
-                    <label className="flex items-center gap-3 w-full bg-gray-700/50 border border-gray-600 rounded-lg px-3 py-2.5 cursor-pointer hover:border-yellow-400 focus-within:border-yellow-400 focus-within:ring-1 focus-within:ring-yellow-400 transition-colors text-sm">
+                    <label className="flex items-center gap-3 w-full bg-gray  -700/50 border border-gray-600 rounded-lg px-3 py-2.5 cursor-pointer hover:border-blue-400 focus-within:border-blue-400 focus-within:ring-1 focus-within:ring-blue-400 transition-colors text-sm">
                       <span className="text-gray-400 truncate flex-1">
                         {selectedFile ? selectedFile.name : 'Desenho, PDF, imagem...'}
                       </span>
-                      <span className="text-yellow-400 text-xs font-medium shrink-0">Escolher</span>
+                      <span className="text-blue-400 text-xs font-medium shrink-0">Escolher</span>
                       <input
                         type="file"
                         accept=".pdf,.png,.jpg,.jpeg,.svg,.dxf,.dwg"
@@ -239,7 +239,7 @@ export function ContactSection() {
                     <a
                       href={`mailto:tubaferram@gmail.com?subject=Solicitação de Orçamento&body=${buildEmailBody()}`}
                       className="flex-1 flex items-center justify-center gap-2 font-semibold px-4 py-2.5 rounded-lg transition-colors text-sm text-gray-950"
-                      style={{ backgroundColor: '#FFF400' }}
+                      style={{ backgroundColor: '#5487ff' }}
                     >
                       <Send className="h-4 w-4" />
                       Enviar via Email

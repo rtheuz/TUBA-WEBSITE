@@ -34,7 +34,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <a href="#inicio" className="flex items-center gap-3 group">
-            <div className="p-2 rounded-lg transition-colors" style={{ backgroundColor: '#FFF400' }}>
+            <div className="p-2 rounded-lg transition-colors" style={{ backgroundColor: '#ffffff' }}>
               <img src="https://i.imgur.com/aHxlYK9.png" alt="Ícone TUBA" className="h-8 w-8 object-contain" />
             </div>
             <img src="https://i.imgur.com/o8GQOEV.png" alt="TUBA" className="h-10 w-auto object-contain" />
@@ -46,7 +46,7 @@ export function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-gray-300 hover:text-yellow-300 transition-colors text-sm font-medium"
+                className="text-white-300 hover:text-blue-500 transition-colors text-sm font-bold text-transform: uppercase"
               >
                 {link.label}
               </a>
@@ -61,9 +61,9 @@ export function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               className="font-semibold px-4 py-2 rounded-lg text-sm transition-colors text-gray-950"
-              style={{ backgroundColor: '#FFF400' }}
+              style={{ backgroundColor: '#b1ee14' }}
             >
-              Solicite Orçamento
+              Solicite um Orçamento
             </a>
           </div>
 
@@ -87,7 +87,7 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="block text-gray-300 hover:text-yellow-300 transition-colors py-2 text-sm font-medium"
+                className="block text-gray-300 hover:text-green-500 transition-colors py-2 text-sm font-bold text-transform: uppercase text-center"
               >
                 {link.label}
               </a>
@@ -97,9 +97,9 @@ export function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               className="block font-semibold px-4 py-2 rounded-lg text-sm transition-colors text-center mt-4 text-gray-950"
-              style={{ backgroundColor: '#FFF400' }}
+              style={{ backgroundColor: '#8ec600' }}
             >
-              Solicite Orçamento
+              Solicite um Orçamento
             </a>
             <div className="flex justify-center mt-4">
               <ThemeToggle />

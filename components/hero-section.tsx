@@ -14,7 +14,7 @@ export function HeroSection() {
         <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="amber" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20 relative z-10">
-          <Card className="w-full bg-black/[0.96] relative overflow-hidden border-gray-800 min-h-[500px] flex flex-col lg:flex-row">
+          <Card className="w-full bg-black/[0.5] relative overflow-hidden border-gray-800 min-h-[500px] flex flex-col lg:flex-row">
             {/* Left Content */}
             <div className="flex-1 p-8 lg:p-12 flex flex-col justify-center relative z-10">
               <motion.div
@@ -22,7 +22,7 @@ export function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <span className="inline-block bg-yellow-400/10 text-white border border-yellow-400/20 rounded-full px-3 py-1 text-sm font-medium mb-6">
+                <span className="inline-block text-white text-sm font-medium mb-6">
                   Fundada em 2009 · São Bernardo do Campo - SP
                 </span>
               </motion.div>
@@ -43,7 +43,7 @@ export function HeroSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-gray-400 text-lg mb-8 max-w-lg"
+                className="text-gray-100 text-lg mb-8 max-w-lg"
               >
                 Soluções em corte a laser, dobra e solda com precisão industrial. 
                 Qualidade e expertise em metalurgia desde 2009.
@@ -60,14 +60,14 @@ export function HeroSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 font-semibold px-6 py-3 rounded-lg transition-colors text-gray-950"
-                  style={{ backgroundColor: '#FFF400' }}
+                  style={{ backgroundColor: '#8fc508' }}
                 >
                   <MessageCircle className="h-5 w-5" />
-                  Solicite Orçamento
+                  Solicite um Orçamento
                 </a>
                 <a
                   href="#servicos"
-                  className="flex items-center justify-center gap-2 border border-gray-700 hover:border-yellow-400 text-gray-300 hover:text-yellow-300 font-medium px-6 py-3 rounded-lg transition-colors"
+                  className="flex items-center justify-center gap-2 border border-white-700 hover:border-blue-400 text-gray-300 hover:text-blue-300 font-medium px-6 py-3 rounded-lg transition-colors"
                 >
                   Conheça Nossos Serviços
                   <ArrowRight className="h-5 w-5" />

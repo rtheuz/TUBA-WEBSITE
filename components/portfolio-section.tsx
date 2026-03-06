@@ -47,13 +47,11 @@ export function PortfolioSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="inline-block bg-yellow-400/10 text-yellow-300 border border-yellow-400/20 rounded-full px-3 py-1 text-sm font-medium mb-4">
-            Nosso trabalho
-          </span>
+          
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            <span className="text-yellow-300">Portfólio</span>
+            <span className="text-blue-300">Portfólio</span>
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <p className="text-gray-300 max-w-2xl mx-auto">
             Confira alguns dos nossos projetos e trabalhos realizados ao longo dos anos.
           </p>
         </motion.div>
