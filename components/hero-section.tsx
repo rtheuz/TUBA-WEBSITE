@@ -45,7 +45,7 @@ export function HeroSection() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-gray-100 text-lg mb-8 max-w-lg"
               >
-                Soluções em corte a laser, dobra e solda com precisão industrial. 
+                Soluções em corte a laser, dobra e solda. 
                 Qualidade e expertise em metalurgia desde 2009.
               </motion.p>
 

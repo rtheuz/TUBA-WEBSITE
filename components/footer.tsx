@@ -51,7 +51,7 @@ export function Footer() {
                 { href: '#contato', label: 'Contato' },
               ].map((link) => (
                 <li key={link.href}>
-                  <a href={link.href} className="text-gray-300 hover:text-yellow-300 transition-colors text-sm">
+                  <a href={link.href} className="text-gray-300 hover:text-blue-300 transition-colors text-sm">
                     {link.label}
                   </a>
                 </li>
