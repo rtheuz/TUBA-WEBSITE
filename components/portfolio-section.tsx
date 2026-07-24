@@ -6,33 +6,27 @@ import Image from 'next/image'
 const portfolioImages = [
   {
     src: 'https://i.imgur.com/7ONdmgy.png',
-    alt: 'string'
-
-
+    alt: 'Portfolio project screenshot 1'
   },
   {
     src: 'https://i.imgur.com/DhQZtmV.png',
-    alt: 'string'
-
+    alt: 'Portfolio project screenshot 2'
   },
   {
     src: 'https://i.imgur.com/MVTqmJO.png',
-    alt: 'string'
-
+    alt: 'Portfolio project screenshot 3'
   },
   {
     src: 'https://i.imgur.com/IDkEq5o.png',
-    alt: 'string'
-
+    alt: 'Portfolio project screenshot 4'
   },
   {
     src: 'https://i.imgur.com/w5atK2E.png',
-    alt: 'string'
-
+    alt: 'Portfolio project screenshot 5'
   },
   {
     src: 'https://i.imgur.com/1vWRRWQ.png',
-    alt: 'string'
+    alt: 'Portfolio project screenshot 6'
   },
 ]
 
@@ -73,10 +67,6 @@ export function PortfolioSection() {
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
                 unoptimized
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <h3 className="text-white font-semibold">{image.title}</h3>
-              </div>
             </motion.div>
           ))}
         </div>
