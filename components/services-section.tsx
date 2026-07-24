@@ -30,7 +30,7 @@ const services = [
   {
     icon: Factory,
     title: 'Caldeiraria e Montagens',
-    description: 'Incluindo usinagem, tornearia e outros processos de fabricação metálica de alta precisão.',
+    description: 'Incluindo usinagem e montagens de alta precisão.',
     color: 'text-purple-400',
     bg: 'bg-purple-400/10',
   },
