@@ -5,27 +5,34 @@ import Image from 'next/image'
 
 const portfolioImages = [
   {
-    src: 'https://i.imgur.com/7ONdmgy.png'
+    src: 'https://i.imgur.com/7ONdmgy.png',
+    alt: 'string'
+
 
   },
   {
-    src: 'https://i.imgur.com/DhQZtmV.png'
+    src: 'https://i.imgur.com/DhQZtmV.png',
+    alt: 'string'
 
   },
   {
-    src: 'https://i.imgur.com/MVTqmJO.png'
+    src: 'https://i.imgur.com/MVTqmJO.png',
+    alt: 'string'
 
   },
   {
-    src: 'https://i.imgur.com/IDkEq5o.png'
+    src: 'https://i.imgur.com/IDkEq5o.png',
+    alt: 'string'
 
   },
   {
-    src: 'https://i.imgur.com/w5atK2E.png'
+    src: 'https://i.imgur.com/w5atK2E.png',
+    alt: 'string'
 
   },
   {
-    src: 'https://i.imgur.com/1vWRRWQ.png'
+    src: 'https://i.imgur.com/1vWRRWQ.png',
+    alt: 'string'
   },
 ]
 
