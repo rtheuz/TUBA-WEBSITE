@@ -1,8 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { motion } from 'framer-motion'
-import { Zap, Play, RotateCcw, Crosshair, Cpu } from 'lucide-react'
+import { Zap, Crosshair, Cpu } from 'lucide-react'
 
 interface Spark {
   x: number
@@ -14,17 +13,21 @@ interface Spark {
   color: string
 }
 
-export function LaserCuttingDisplay() {
+interface LaserCuttingDisplayProps {
+  isActive?: boolean
+}
+
+export function LaserCuttingDisplay({ isActive = true }: LaserCuttingDisplayProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const containerRef = useRef<HTMLDivElement | null>(null)
   const [interactive, setInteractive] = useState(false)
   const [coords, setCoords] = useState({ x: 320, y: 180 })
   const [gasType, setGasType] = useState<'N2' | 'O2'>('N2')
-  const [powerKw, setPowerKw] = useState(12)
 
   useEffect(() => {
     const canvas = canvasRef.current
-    if (!canvas) return
+    const container = containerRef.current
+    if (!canvas || !container) return
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
@@ -32,22 +35,37 @@ export function LaserCuttingDisplay() {
     let width = 0
     let height = 0
 
-    // Set canvas dimensions
+    // Set canvas dimensions safely with transform reset
     const resize = () => {
-      if (!canvas.parentElement) return
-      const rect = canvas.parentElement.getBoundingClientRect()
+      if (!container || !canvas) return
+      const rect = container.getBoundingClientRect()
       const dpr = Math.min(window.devicePixelRatio || 1, 2)
-      width = rect.width
-      height = rect.height
-      canvas.width = width * dpr
-      canvas.height = height * dpr
+      
+      const targetW = rect.width > 0 ? rect.width : (container.offsetWidth || 560)
+      const targetH = rect.height > 0 ? rect.height : (container.offsetHeight || 480)
+
+      if (targetW <= 0 || targetH <= 0) return
+
+      width = targetW
+      height = targetH
+
+      canvas.width = Math.floor(width * dpr)
+      canvas.height = Math.floor(height * dpr)
+      
+      ctx.setTransform(1, 0, 0, 1, 0, 0)
       ctx.scale(dpr, dpr)
     }
 
     resize()
+
+    // ResizeObserver ensures that if the tab was hidden and becomes visible, it re-measures instantly!
+    const resizeObserver = new ResizeObserver(() => {
+      resize()
+    })
+    resizeObserver.observe(container)
     window.addEventListener('resize', resize)
 
-    // Pre-calculate cutting path (An industrial precision flange with gear teeth and holes)
+    // Pre-calculate cutting path (An industrial precision flange with gear teeth)
     const points: { x: number; y: number }[] = []
     const cx = 300
     const cy = 200
@@ -115,43 +133,55 @@ export function LaserCuttingDisplay() {
     // Render loop
     let lastTime = performance.now()
     const render = (time: number) => {
+      if (!isActive) {
+        animationFrameId = requestAnimationFrame(render)
+        return
+      }
+
+      if (width <= 0 || height <= 0) {
+        resize()
+      }
+
       const delta = (time - lastTime) / 1000
       lastTime = time
 
-      ctx.clearRect(0, 0, width, height)
+      ctx.clearRect(0, 0, width || 600, height || 480)
 
-      // 1. Draw CNC bed plate with brushed titanium texture
+      const w = width || 600
+      const h = height || 480
+
+      // 1. Draw CNC bed plate with titanium texture
       ctx.fillStyle = '#080d19'
-      ctx.fillRect(15, 15, width - 30, height - 30)
+      ctx.fillRect(15, 15, w - 30, h - 30)
 
       // Machine grid
       ctx.strokeStyle = 'rgba(0, 240, 255, 0.08)'
       ctx.lineWidth = 1
       const gridSize = 25
-      for (let x = 15; x < width - 30; x += gridSize) {
+      for (let x = 15; x < w - 30; x += gridSize) {
         ctx.beginPath()
         ctx.moveTo(x, 15)
-        ctx.lineTo(x, height - 15)
+        ctx.lineTo(x, h - 15)
         ctx.stroke()
       }
-      for (let y = 15; y < height - 30; y += gridSize) {
+      for (let y = 15; y < h - 30; y += gridSize) {
         ctx.beginPath()
         ctx.moveTo(15, y)
-        ctx.lineTo(width - 15, y)
+        ctx.lineTo(w - 15, y)
         ctx.stroke()
       }
 
       // Plate border with fasteners
       ctx.strokeStyle = 'rgba(0, 240, 255, 0.25)'
       ctx.lineWidth = 1.5
-      ctx.strokeRect(15, 15, width - 30, height - 30)
+      ctx.strokeRect(15, 15, w - 30, h - 30)
 
-      // Clamp fixtures in 4 corners
+      // Clamps in 4 corners
       const clamps = [
         { x: 22, y: 22 },
-        { x: width - 22, y: 22 },
-        { x: 22, y: height - 22 },
-        { x: width - 22, y: height - 22 },
+        { x: w - 22, y: 22 },
+        { x: 22, y: h - 22 },
+        { x: w - 22, y: h - 22 },
       ]
       clamps.forEach((c) => {
         ctx.fillStyle = '#1e293b'
@@ -164,9 +194,9 @@ export function LaserCuttingDisplay() {
       })
 
       // Scale points dynamically to fit canvas center
-      const centerX = width * 0.48
-      const centerY = height * 0.52
-      const scale = Math.min(width, height) / 450
+      const centerX = w * 0.48
+      const centerY = h * 0.52
+      const scale = Math.min(w, h) / 450
 
       // Compute target laser head position
       let targetX = centerX
@@ -201,7 +231,7 @@ export function LaserCuttingDisplay() {
       cutTrail.push({ x: currentPos.x, y: currentPos.y })
       if (cutTrail.length > 180) cutTrail.shift()
 
-      // 2. Draw historical cut kerf on sheet
+      // 2. Draw cut kerf on sheet
       if (cutTrail.length > 2) {
         ctx.lineCap = 'round'
         ctx.lineJoin = 'round'
@@ -223,21 +253,19 @@ export function LaserCuttingDisplay() {
       }
 
       // 3. Draw Laser Head Gantry & Axis lines
-      // X-gantry rail
       ctx.strokeStyle = 'rgba(0, 240, 255, 0.2)'
       ctx.lineWidth = 1
       ctx.beginPath()
       ctx.moveTo(15, currentPos.y)
-      ctx.lineTo(width - 15, currentPos.y)
+      ctx.lineTo(w - 15, currentPos.y)
       ctx.stroke()
 
-      // Y-gantry rail
       ctx.beginPath()
       ctx.moveTo(currentPos.x, 15)
-      ctx.lineTo(currentPos.x, height - 15)
+      ctx.lineTo(currentPos.x, h - 15)
       ctx.stroke()
 
-      // Laser Nozzle assembly (High-tech conical head)
+      // Laser Nozzle assembly
       ctx.save()
       ctx.translate(currentPos.x, currentPos.y)
 
@@ -260,7 +288,7 @@ export function LaserCuttingDisplay() {
       ctx.lineTo(0, 24)
       ctx.stroke()
 
-      // Molten focal point (Intense glowing core)
+      // Molten focal point
       const grad = ctx.createRadialGradient(0, 0, 1, 0, 0, 28)
       grad.addColorStop(0, '#ffffff')
       grad.addColorStop(0.2, '#00f0ff')
@@ -280,7 +308,7 @@ export function LaserCuttingDisplay() {
         const s = sparks[i]
         s.x += s.vx
         s.y += s.vy
-        s.vy += 0.12 // gravity
+        s.vy += 0.12
         s.alpha -= 0.035
 
         if (s.alpha <= 0) {
@@ -305,12 +333,13 @@ export function LaserCuttingDisplay() {
     animationFrameId = requestAnimationFrame(render)
 
     return () => {
+      resizeObserver.disconnect()
       window.removeEventListener('resize', resize)
       canvas.removeEventListener('mousemove', onMouseMove)
       canvas.removeEventListener('mouseleave', onMouseLeave)
       cancelAnimationFrame(animationFrameId)
     }
-  }, [])
+  }, [isActive])
 
   return (
     <div
@@ -324,7 +353,7 @@ export function LaserCuttingDisplay() {
       <div className="absolute top-4 left-4 z-20 pointer-events-none flex flex-col gap-1.5 font-mono text-xs">
         <div className="flex items-center gap-2 bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-md border border-cyan-500/30 text-cyan-300">
           <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping inline-block" />
-          <span className="font-semibold tracking-wider">LASER FIBRA ÓPTICA 12.000W</span>
+          <span className="font-semibold tracking-wider">CORTE A LASER CNC</span>
         </div>
         <div className="bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-md border border-gray-800 text-gray-300 flex items-center gap-4">
           <span>X: <strong className="text-white font-mono">{coords.x.toFixed(1)} mm</strong></span>
@@ -341,12 +370,12 @@ export function LaserCuttingDisplay() {
           title="Alternar Gás de Assistência"
         >
           <Cpu className="w-3.5 h-3.5 text-cyan-400" />
-          Gás: <strong className="text-white">{gasType} ({gasType === 'N2' ? '18 bar' : '6 bar'})</strong>
+          Gás: <strong className="text-white">{gasType}</strong>
         </button>
 
         <div className="hidden sm:flex bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-md border border-amber-500/30 text-amber-300 items-center gap-1.5">
           <Zap className="w-3.5 h-3.5 text-amber-400" />
-          <span>POTÊNCIA: <strong className="text-white">100%</strong></span>
+          <span>PRECISÃO INDUSTRIAL</span>
         </div>
       </div>
 
@@ -364,8 +393,8 @@ export function LaserCuttingDisplay() {
         </div>
 
         <div className="flex items-center gap-4 text-gray-400">
-          <span className="hidden md:inline">Velocidade: <strong className="text-white">32 m/min</strong></span>
-          <span>Nesting: <strong className="text-emerald-400">96.8% Eficiência</strong></span>
+          <span className="hidden md:inline">Operação: <strong className="text-white">Corte Contínuo</strong></span>
+          <span>Repetibilidade: <strong className="text-emerald-400">100%</strong></span>
         </div>
       </div>
     </div>

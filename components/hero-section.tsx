@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { MessageCircle, ArrowRight, ShieldCheck, Zap, Layers, Cpu, Box } from 'lucide-react'
+import { MessageCircle, ArrowRight, ShieldCheck, Zap, Box } from 'lucide-react'
 import { LaserCuttingDisplay } from '@/components/laser-cutting-display'
 import { SplineScene } from '@/components/ui/splite'
 
@@ -17,14 +17,14 @@ export function HeroSection() {
 
       {/* Decorative Crosshair markings */}
       <div className="absolute top-28 left-8 text-cyan-500/20 font-mono text-[10px] hidden lg:block select-none pointer-events-none">
-        <div>SYS: TUBA-CNC-FIBER</div>
+        <div>SYS: TUBA-CNC-LASER</div>
         <div>AXIS: X/Y/Z REALTIME</div>
         <div>LOC: SÃO BERNARDO DO CAMPO</div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Hero Content (7 Cols) */}
+          {/* Left Hero Content (6 Cols) */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -39,32 +39,30 @@ export function HeroSection() {
 
             {/* Main Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1] mb-6">
-              Corte a Laser <br />
               <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500 bg-clip-text text-transparent laser-text-glow">
-                Fibra Óptica
-              </span>{' '}
-              & Dobra CNC
+                Corte a Laser
+              </span> <br />
+              & Dobra de Precisão
             </h1>
 
-            {/* Description */}
+            {/* Exact requested description text */}
             <p className="text-gray-300 text-base sm:text-lg mb-8 leading-relaxed max-w-xl">
-              Especialistas em corte térmico de alta precisão, conformação e caldeiraria industrial. 
-              Garantia de tolerância centesimal, sem rebarbas e entrega ágil para protótipos e grandes lotes seriados.
+              Especialistas em corte de alta precisão, dobra, solda e outros serviços industriais. Garantia de tolerância centesimal, sem rebarbas e entrega ágil para protótipos e grandes lotes seriados.
             </p>
 
             {/* Technical Badges in Hero */}
             <div className="grid grid-cols-3 gap-3 mb-8 max-w-lg">
               <div className="bg-[#091020] border border-cyan-500/20 rounded-xl p-3 text-center">
-                <div className="text-cyan-400 font-mono font-bold text-sm sm:text-base">12.000W</div>
-                <div className="text-[11px] text-gray-400 font-medium">Laser Fibra</div>
+                <div className="text-cyan-400 font-mono font-bold text-sm sm:text-base">Alta Precisão</div>
+                <div className="text-[11px] text-gray-400 font-medium">Tolerância Centesimal</div>
               </div>
               <div className="bg-[#091020] border border-cyan-500/20 rounded-xl p-3 text-center">
-                <div className="text-cyan-400 font-mono font-bold text-sm sm:text-base">±0.03mm</div>
-                <div className="text-[11px] text-gray-400 font-medium">Precisão CNC</div>
+                <div className="text-cyan-400 font-mono font-bold text-sm sm:text-base">Corte & Dobra</div>
+                <div className="text-[11px] text-gray-400 font-medium">Soluções Completas</div>
               </div>
               <div className="bg-[#091020] border border-cyan-500/20 rounded-xl p-3 text-center">
-                <div className="text-cyan-400 font-mono font-bold text-sm sm:text-base">3000x1500</div>
-                <div className="text-[11px] text-gray-400 font-medium">Mesa Útil (mm)</div>
+                <div className="text-cyan-400 font-mono font-bold text-sm sm:text-base">Sob Medida</div>
+                <div className="text-[11px] text-gray-400 font-medium">Protótipos & Séries</div>
               </div>
             </div>
 
@@ -131,23 +129,21 @@ export function HeroSection() {
                   Visualizador 3D
                 </button>
               </div>
-
-              <span className="text-[11px] font-mono text-cyan-400/80 hidden sm:inline">
-                [60 FPS HARDWARE ACCEL]
-              </span>
             </div>
 
-            {/* Display Panel */}
-            {activeTab === 'simulator' ? (
-              <LaserCuttingDisplay />
-            ) : (
+            {/* Both views kept in DOM so switching back preserves canvas state and never goes blank */}
+            <div style={{ display: activeTab === 'simulator' ? 'block' : 'none' }}>
+              <LaserCuttingDisplay isActive={activeTab === 'simulator'} />
+            </div>
+
+            <div style={{ display: activeTab === 'spline' ? 'block' : 'none' }}>
               <div className="w-full h-[460px] lg:h-[520px] rounded-2xl overflow-hidden border border-cyan-500/30 bg-[#060a14] relative">
                 <SplineScene
                   scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
                   className="w-full h-full"
                 />
               </div>
-            )}
+            </div>
           </motion.div>
         </div>
       </div>

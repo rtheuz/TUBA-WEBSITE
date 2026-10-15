@@ -6,45 +6,45 @@ import { Zap, Layers, Flame, Factory, Wrench, FileCode2, ArrowRight } from 'luci
 const services = [
   {
     icon: Zap,
-    tag: 'CAPACIDADE ATÉ 25MM',
-    title: 'Corte a Laser Fibra Óptica',
-    description: 'Corte de altíssima precisão térmica para aço carbono, aço inoxidável, alumínio, latão e cobre. Acabamento perpendicular sem rebarbas.',
-    materials: ['Aço Carbono até 25mm', 'Inox até 20mm', 'Alumínio até 16mm'],
+    tag: 'ALTA PRECISÃO',
+    title: 'Corte a Laser',
+    description: 'Corte de alta precisão para aço carbono, aço inoxidável, alumínio e diversos metais com tecnologia avançada. Acabamento limpo, perpendicular e sem rebarbas.',
+    materials: ['Aço Carbono', 'Aço Inox', 'Alumínio e Metais Diversos'],
   },
   {
     icon: Layers,
-    tag: 'ATÉ 200T / 3200MM',
+    tag: 'CONFORMAÇÃO CNC',
     title: 'Dobra de Chapas CNC',
-    description: 'Conformação de peças com repetibilidade geométrica rigorosa. Dobradeiras CNC multi-eixos com compensação de deformação.',
-    materials: ['Ângulos Complexos', 'Raios Personalizados', 'Grandes Formatos'],
+    description: 'Dobra precisa de chapas metálicas com repetibilidade geométrica rigorosa. Dobradeiras CNC com ferramentas adequadas para cada raio e ângulo.',
+    materials: ['Conformação de Chapas', 'Ângulos e Raios Precisos', 'Repetibilidade Garantida'],
   },
   {
     icon: Flame,
-    tag: 'TIG / MIG / LASER',
-    title: 'Soldagem Especializada',
-    description: 'Processos de solda qualificados para fins estruturais, tanques e acabamento estético decorativo de alta exigência mecânica.',
-    materials: ['Solda TIG em Inox', 'Solda MIG/MAG Pesada', 'Solda Ponto'],
+    tag: 'SOLDA PROFISSIONAL',
+    title: 'Solda Especializada',
+    description: 'Solda profissional para fins estruturais e decorativos com máxima qualidade mecânica, estanqueidade e durabilidade.',
+    materials: ['Solda TIG em Inox', 'Solda MIG/MAG Estrutural', 'Acabamento Refinado'],
   },
   {
     icon: Factory,
-    tag: 'PROJETOS COMPLETOS',
-    title: 'Caldeiraria & Conjuntos Soldados',
-    description: 'Construção mecânica completa de gabinetes, chassis, tubulações, bases de máquinas e estruturas industriais conforme desenho técnico.',
-    materials: ['Chassis & Gabinetes', 'Estruturas Metálicas', 'Montagem Final'],
+    tag: 'CONJUNTOS INDUSTRIAIS',
+    title: 'Caldeiraria & Montagens',
+    description: 'Construção mecânica e montagem de gabinetes, suportes, tubulações, bases de máquinas e estruturas industriais conforme projeto.',
+    materials: ['Chassis & Gabinetes', 'Estruturas Metálicas', 'Montagens Sob Medida'],
   },
   {
     icon: Wrench,
-    tag: 'ACABAMENTO TÉCNICO',
+    tag: 'SERVIÇOS DE APOIO',
     title: 'Usinagem & Furação Complementar',
-    description: 'Operações mecânicas de apoio incluindo rosqueamento automático, chanfros para solda, furos escareados e acabamento superficial.',
-    materials: ['Rosqueamento M3 a M24', 'Escareamento', 'Polimento & Rebaixo'],
+    description: 'Operações mecânicas de apoio incluindo rosqueamento, chanfros para solda, furos escareados e preparação completa para montagem.',
+    materials: ['Rosqueamento', 'Escareamento', 'Furação Técnica'],
   },
   {
     icon: FileCode2,
-    tag: 'CAD/CAM INTEGRADO',
-    title: 'Engenharia & Nesting Avançado',
-    description: 'Otimização computadorizada de aproveitamento de chapa que reduz custos de matéria-prima e acelera o tempo de produção.',
-    materials: ['Leitura .DXF/.DWG/.STEP', 'Desenvolvimento 3D', 'Aproveitamento +95%'],
+    tag: 'SOFTWARE ESPECIALIZADO',
+    title: 'Engenharia & CAD/CAM',
+    description: 'Otimização computadorizada de aproveitamento de chapa que reduz custos de matéria-prima e agiliza o tempo de produção.',
+    materials: ['Leitura .DXF/.DWG/.STEP', 'Desenvolvimento 3D', 'Aproveitamento Máximo'],
   },
 ]
 
@@ -64,13 +64,13 @@ export function ServicesSection() {
         >
           <div className="inline-flex items-center gap-2 bg-cyan-950/70 border border-cyan-500/30 rounded-full px-4 py-1 text-xs font-semibold text-cyan-300 uppercase tracking-widest mb-3">
             <Zap className="w-3.5 h-3.5 text-cyan-400" />
-            Capacidades Industriais
+            Serviços Industriais
           </div>
           <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight mb-4">
-            Nossas Soluções em <span className="text-cyan-400">Metalurgia & Corte</span>
+            Nossas Soluções em <span className="text-cyan-400">Corte a Laser & Metalurgia</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-base">
-            Parque fabril moderno em São Bernardo do Campo preparado para atender rigorosas normas de tolerância, acabamento e prazos.
+            Parque fabril em São Bernardo do Campo preparado para atender rigorosas normas de tolerância, acabamento e prazos.
           </p>
         </motion.div>
 
@@ -86,7 +86,6 @@ export function ServicesSection() {
               className="group"
             >
               <div className="h-full bg-gradient-to-b from-[#0a1020] to-[#050812] border border-gray-800 rounded-2xl p-7 flex flex-col justify-between transition-all duration-300 group-hover:border-cyan-500/50 group-hover:shadow-[0_0_30px_rgba(0,240,255,0.12)] group-hover:-translate-y-1 relative overflow-hidden">
-                {/* Laser Corner highlight */}
                 <div className="absolute top-0 right-0 w-24 h-24 bg-cyan-500/5 rounded-bl-full pointer-events-none group-hover:bg-cyan-500/10 transition-colors" />
 
                 <div>
@@ -126,7 +125,7 @@ export function ServicesSection() {
                   rel="noopener noreferrer"
                   className="w-full py-2.5 px-3 rounded-xl border border-gray-800 group-hover:border-cyan-500/40 bg-gray-900/40 group-hover:bg-cyan-950/40 text-gray-300 group-hover:text-cyan-200 text-xs font-semibold flex items-center justify-center gap-2 transition-all"
                 >
-                  <span>Orçar {service.title.split(' ')[0]}</span>
+                  <span>Orçar {service.title}</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </a>
               </div>

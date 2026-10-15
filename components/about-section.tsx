@@ -6,8 +6,8 @@ import { CheckCircle2, MessageCircle, ArrowRight, ShieldCheck, Award } from 'luc
 
 const highlights = [
   'Fundada em 2009 no Grande ABC Paulista',
-  'Corte a Laser Fibra Óptica de 12.000W',
-  'Dobra CNC de precisão com múltiplos eixos',
+  'Corte a laser de alta precisão',
+  'Dobra CNC com múltiplos eixos',
   'Leitura direta de arquivos CAD 2D e 3D',
   'Controle de qualidade e rastreabilidade fabril',
   'Atendimento a indústrias, arquitetura e engenharia',
@@ -29,15 +29,17 @@ export function AboutSection() {
             transition={{ duration: 0.6 }}
             className="lg:col-span-6 relative"
           >
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-cyan-500/30 bg-[#060a14] shadow-[0_0_30px_rgba(0,240,255,0.12)]">
-              <Image
-                src="https://i.imgur.com/0NOvQT5.png"
-                alt="TUBA Ferramentaria - Instalações Industriais"
-                fill
-                className="object-cover"
-                unoptimized
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-transparent opacity-80" />
+            {/* Logo container with generous padding and contained sizing */}
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-cyan-500/30 bg-[#060a14] p-8 sm:p-14 flex items-center justify-center shadow-[0_0_30px_rgba(0,240,255,0.12)]">
+              <div className="relative w-full h-full max-h-[160px] sm:max-h-[210px]">
+                <Image
+                  src="https://i.imgur.com/0NOvQT5.png"
+                  alt="TUBA Ferramentaria"
+                  fill
+                  className="object-contain"
+                  unoptimized
+                />
+              </div>
 
               {/* Technical overlay mark */}
               <div className="absolute top-4 left-4 font-mono text-[11px] text-cyan-400 bg-black/70 backdrop-blur-md px-3 py-1 rounded-md border border-cyan-500/30">
@@ -79,7 +81,7 @@ export function AboutSection() {
               A <strong>TUBA FERRAMENTARIA LTDA</strong> foi fundada em 2009 em São Bernardo do Campo - SP, no epicentro da indústria automotiva e metalúrgica do Brasil.
             </p>
             <p className="text-gray-400 mb-8 leading-relaxed text-sm">
-              Ao longo de mais de uma década e meia de atuação ininterrupta, modernizamos continuamente nossa linha produtiva com tecnologia a laser fibra óptica de alta potência, dobradeiras CNC de grande tonelagem e softwares integrados de CAD/CAM. Entregamos desde peças individuais sob medida até lotes seriados de grande porte com precisão absoluta.
+              Ao longo de mais de uma década e meia de atuação ininterrupta, modernizamos continuamente nossa linha produtiva com tecnologia em corte a laser, prensas dobradeiras CNC e softwares integrados de CAD/CAM. Entregamos desde peças individuais sob medida até lotes seriados de grande porte com precisão absoluta.
             </p>
 
             {/* Highlights Grid */}

@@ -10,7 +10,7 @@ export function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] text-gray-400">
           <div className="flex items-center gap-2">
             <Zap className="w-3.5 h-3.5 text-cyan-400" />
-            <span>FIBER LASER CUTTING & PRECISION SHEET METAL FABRICATION</span>
+            <span>CORTE A LASER & METALURGIA DE ALTA PRECISÃO</span>
           </div>
           <div className="flex items-center gap-4 text-gray-400">
             <span>SÃO BERNARDO DO CAMPO - SP</span>

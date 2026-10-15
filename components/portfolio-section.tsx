@@ -21,7 +21,7 @@ const portfolioData: PortfolioItem[] = [
     category: 'laser',
     material: 'Aço Carbono SAE 1020 (16mm)',
     tolerancia: '±0.03 mm',
-    processo: 'Corte Laser Fibra Óptica + Furação Escareada',
+    processo: 'Corte a Laser + Furação Escareada',
   },
   {
     src: 'https://i.imgur.com/DhQZtmV.png',
@@ -37,7 +37,7 @@ const portfolioData: PortfolioItem[] = [
     category: 'laser',
     material: 'Alumínio Naval 5052 (3.0mm)',
     tolerancia: '±0.05 mm',
-    processo: 'Corte Laser Fibra c/ Gás Nitrogênio Puro',
+    processo: 'Corte a Laser de Alta Precisão',
   },
   {
     src: 'https://i.imgur.com/IDkEq5o.png',

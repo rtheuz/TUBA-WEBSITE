@@ -2,7 +2,6 @@ import { Navbar } from '@/components/navbar'
 import { HeroSection } from '@/components/hero-section'
 import { ServicesSection } from '@/components/services-section'
 import { EstimatorSection } from '@/components/estimator-section'
-import { TechnicalSpecsSection } from '@/components/technical-specs-section'
 import { WhyChooseSection } from '@/components/why-choose-section'
 import { AboutSection } from '@/components/about-section'
 import { PortfolioSection } from '@/components/portfolio-section'
@@ -19,7 +18,6 @@ export default function Home() {
       <LaserDivider glowColor="cyan" />
       <ServicesSection />
       <EstimatorSection />
-      <TechnicalSpecsSection />
       <LaserDivider glowColor="amber" />
       <WhyChooseSection />
       <AboutSection />

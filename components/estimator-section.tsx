@@ -2,34 +2,34 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Calculator, CheckCircle2, MessageCircle, ArrowRight, Sparkles, Layers, Sliders } from 'lucide-react'
+import { Calculator, CheckCircle2, MessageCircle, ArrowRight, Sliders } from 'lucide-react'
 
 const materials = [
-  { id: 'carbono', name: 'Aço Carbono (1020 / A36)', maxThick: '25mm', gas: 'O₂ / N₂' },
-  { id: 'inox', name: 'Aço Inox (AISI 304 / 316)', maxThick: '20mm', gas: 'N₂ Alta Pressão' },
-  { id: 'aluminio', name: 'Alumínio (5052 / 6061)', maxThick: '16mm', gas: 'N₂ Puro' },
-  { id: 'latao', name: 'Latão & Cobre', maxThick: '8mm', gas: 'Óptica Fibra' },
-  { id: 'galvanizado', name: 'Chapa Galvanizada / ZRC', maxThick: '6mm', gas: 'N₂' },
+  { id: 'carbono', name: 'Aço Carbono (1020 / A36)', desc: 'Estrutural, peças mecânicas e bases' },
+  { id: 'inox', name: 'Aço Inox (AISI 304 / 316)', desc: 'Alimentício, químico e acabamento' },
+  { id: 'aluminio', name: 'Alumínio (5052 / Naval)', desc: 'Leveza e resistência à corrosão' },
+  { id: 'latao', name: 'Latão & Cobre', desc: 'Componentes elétricos e decorativos' },
+  { id: 'galvanizado', name: 'Chapa Galvanizada / ZRC', desc: 'Proteção anticorrosiva' },
 ]
 
 const thicknesses = [
-  '0.8 mm', '1.2 mm', '1.5 mm', '2.0 mm', '3.0 mm (1/8")',
-  '4.75 mm (3/16")', '6.35 mm (1/4")', '9.5 mm (3/8")', '12.7 mm (1/2")', '19.0 mm (3/4")', '25.0 mm (1")'
+  '0.8 mm', '1.2 mm', '1.5 mm', '2.0 mm', '3.0 mm',
+  '4.75 mm', '6.35 mm', '9.5 mm', '12.7 mm', 'Sob Consulta'
 ]
 
 const operations = [
-  { id: 'laser', label: 'Corte a Laser Fibra' },
-  { id: 'dobra', label: 'Dobra CNC' },
-  { id: 'solda', label: 'Solda TIG/MIG' },
+  { id: 'laser', label: 'Corte a Laser' },
+  { id: 'dobra', label: 'Dobra de Chapas' },
+  { id: 'solda', label: 'Solda TIG / MIG' },
   { id: 'caldeiraria', label: 'Caldeiraria & Montagem' },
   { id: 'rosqueamento', label: 'Furação & Rosqueamento' },
 ]
 
 const volumes = [
   'Protótipo / Peça Única',
-  'Pequeno Lote (10 a 50 pçs)',
-  'Lote Médio (50 a 500 pçs)',
-  'Produção Contínua (+500 pçs/mês)',
+  'Pequeno Lote',
+  'Lote Médio',
+  'Produção Contínua',
 ]
 
 export function EstimatorSection() {
@@ -54,12 +54,12 @@ export function EstimatorSection() {
     .join(', ')
 
   const buildQuoteMessage = () => {
-    const text = `Olá, equipe TUBA! Gostaria de uma cotação rápida com os seguintes parâmetros:
+    const text = `Olá, equipe TUBA! Gostaria de uma cotação com os seguintes parâmetros:
 • Material: ${selectedMat.name}
 • Espessura: ${selectedThick}
 • Processos: ${selectedOpsLabels}
-• Volume Estimado: ${selectedVol}
-Tenho o arquivo/desenho para envio.`
+• Volume: ${selectedVol}
+Tenho o desenho/arquivo para envio.`
     return encodeURIComponent(text)
   }
 
@@ -81,10 +81,10 @@ Tenho o arquivo/desenho para envio.`
             Configurador de Peças Técnicas
           </div>
           <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
-            Simulador Rápido de <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500 bg-clip-text text-transparent">Usinagem e Corte</span>
+            Simulador de <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500 bg-clip-text text-transparent">Corte & Dobra</span>
           </h2>
           <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto">
-            Selecione o material, a espessura e os processos do seu projeto para obter atendimento ágil com nossa engenharia.
+            Selecione o material, a espessura e os processos do seu projeto para obter atendimento ágil com nossa equipe.
           </p>
         </motion.div>
 
@@ -116,7 +116,7 @@ Tenho o arquivo/desenho para envio.`
                     }`}
                   >
                     <span className="font-semibold text-white">{m.name}</span>
-                    <span className="text-[11px] text-cyan-400/80">Até {m.maxThick} · Gás {m.gas}</span>
+                    <span className="text-[11px] text-cyan-400/80">{m.desc}</span>
                   </button>
                 ))}
               </div>
@@ -126,7 +126,7 @@ Tenho o arquivo/desenho para envio.`
             <div className="bg-[#090e1c] border border-gray-800 rounded-2xl p-6 shadow-xl">
               <label className="text-sm font-semibold text-gray-200 flex items-center gap-2 mb-3">
                 <span className="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold">2</span>
-                Espessura da Chapa:
+                Espessura Desejada:
               </label>
               <div className="flex flex-wrap gap-2">
                 {thicknesses.map((th) => (
@@ -208,7 +208,6 @@ Tenho o arquivo/desenho para envio.`
             className="lg:col-span-5 sticky top-28"
           >
             <div className="bg-gradient-to-b from-[#0c1324] to-[#060a14] border-2 border-cyan-500/40 rounded-2xl p-6 lg:p-8 shadow-[0_0_35px_rgba(0,240,255,0.15)] relative overflow-hidden">
-              {/* Corner tech accents */}
               <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-cyan-400" />
               <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-cyan-400" />
               <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-cyan-400" />
@@ -231,7 +230,7 @@ Tenho o arquivo/desenho para envio.`
                 </div>
 
                 <div className="flex justify-between items-center py-1.5 border-b border-gray-800/60">
-                  <span className="text-gray-400">Espessura Nominal:</span>
+                  <span className="text-gray-400">Espessura:</span>
                   <span className="text-cyan-300 font-bold">{selectedThick}</span>
                 </div>
 
@@ -247,19 +246,14 @@ Tenho o arquivo/desenho para envio.`
                   <span className="text-gray-200">{selectedVol}</span>
                 </div>
 
-                <div className="flex justify-between items-center py-1.5 border-b border-gray-800/60">
-                  <span className="text-gray-400">Tolerância Fabril:</span>
-                  <span className="text-emerald-400 font-semibold">±0.03 mm a ±0.05 mm</span>
-                </div>
-
                 <div className="flex justify-between items-center py-1.5">
-                  <span className="text-gray-400">Gás Sugerido:</span>
-                  <span className="text-cyan-300">{selectedMat.gas}</span>
+                  <span className="text-gray-400">Tolerância:</span>
+                  <span className="text-emerald-400 font-semibold">Centesimal Conforme Projeto</span>
                 </div>
               </div>
 
               <div className="bg-cyan-950/30 border border-cyan-500/20 rounded-xl p-3 text-[11px] text-gray-300 mb-6 leading-relaxed">
-                <strong className="text-cyan-300">Aceitamos arquivos CAD:</strong> .DXF, .DWG, .STEP, .IGES ou croqui em .PDF com cotas.
+                <strong className="text-cyan-300">Aceitamos arquivos CAD:</strong> .DXF, .DWG, .STEP ou croqui em .PDF com cotas.
               </div>
 
               {/* Direct WhatsApp Action */}

@@ -6,39 +6,39 @@ import { Zap, Gauge, Layers, Clock, ShieldCheck, CheckCircle2 } from 'lucide-rea
 const reasons = [
   {
     icon: Zap,
-    metric: '12kW FIBRA',
-    title: 'Corte a Laser de Alta Densidade',
-    description: 'Equipamentos modernos com feixe óptico concentrado garantem bordas perfeitas, sem escória e com zona termicamente afetada mínima.',
+    metric: 'ALTA PRECISÃO',
+    title: 'Corte a Laser de Alta Precisão',
+    description: 'Equipamentos modernos garantem bordas perfeitas, sem escória, excelente perpendicularidade e acabamento limpo.',
   },
   {
     icon: Gauge,
     metric: '±0.03 MM',
-    title: 'Tolerâncias Centesimais Rigorosas',
-    description: 'Garantia de fidelidade dimensional absoluta aos seus desenhos em DWG, DXF ou STEP, facilitando montagens e soldagens posteriores.',
+    title: 'Tolerâncias Rigorosas',
+    description: 'Garantia de fidelidade dimensional aos seus desenhos técnicos em DWG, DXF ou STEP, facilitando montagens e processos posteriores.',
   },
   {
     icon: Layers,
     metric: 'CAD / CAM',
     title: 'Aproveitamento Inteligente (Nesting)',
-    description: 'Softwares avançados de arranjo de peças reduzem perdas de chapas nobres, gerando economia direta no custo final do seu projeto.',
+    description: 'Softwares avançados de arranjo de peças otimizam o uso de chapas, gerando economia direta no custo final do seu projeto.',
   },
   {
     icon: Clock,
-    metric: 'RESPOSTA EM 2H',
-    title: 'Prazos Competitivos & Agilidade',
-    description: 'Processo ágil desde o envio do orçamento até a expedição das peças cortadas e dobradas, atendendo paradas de fábrica e emergências.',
+    metric: 'AGILIDADE',
+    title: 'Prazos Competitivos & Pontualidade',
+    description: 'Processo ágil desde o envio do orçamento até a entrega das peças cortadas e dobradas, atendendo paradas e cronogramas exigentes.',
   },
   {
     icon: ShieldCheck,
-    metric: 'INSPEÇÃO 100%',
-    title: 'Controle de Qualidade Técnico',
-    description: 'Cada lote de peças passa por checagem dimensional e conferência de rebarba antes da embalagem e liberação para transporte.',
+    metric: 'INSPEÇÃO',
+    title: 'Controle de Qualidade Rigoroso',
+    description: 'Cada lote de peças passa por checagem dimensional e conferência técnica antes da liberação para transporte.',
   },
   {
     icon: CheckCircle2,
     metric: '+15 ANOS',
     title: 'Polo Industrial do ABC Paulista',
-    description: 'Empresa consolidada desde 2009 em São Bernardo do Campo - SP, com tradição em atender as maiores indústrias da região.',
+    description: 'Empresa consolidada desde 2009 em São Bernardo do Campo - SP, com tradição e relacionamento com as indústrias da região.',
   },
 ]
 
@@ -58,13 +58,13 @@ export function WhyChooseSection() {
         >
           <div className="inline-flex items-center gap-2 bg-cyan-950/70 border border-cyan-500/30 rounded-full px-4 py-1 text-xs font-semibold text-cyan-300 uppercase tracking-widest mb-3">
             <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
-            Diferenciais de Engenharia
+            Diferenciais de Produção
           </div>
           <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight mb-4">
             Por que confiar seu projeto à <span className="text-cyan-400">TUBA?</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-base">
-            Combinamos maquinário CNC de ponta, processos enxutos e mais de 15 anos de expertise técnica para transformar metal em soluções perfeitas.
+            Combinamos maquinário CNC moderno, processos enxutos e mais de 15 anos de expertise técnica para entregar qualidade em cada peça.
           </p>
         </motion.div>
 
@@ -99,7 +99,7 @@ export function WhyChooseSection() {
 
                 <div className="mt-6 pt-4 border-t border-gray-800/80 flex items-center gap-2 text-xs text-cyan-400/80 font-mono">
                   <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-                  <span>Padrão TUBA de Precisão</span>
+                  <span>Padrão TUBA de Qualidade</span>
                 </div>
               </div>
             </motion.div>
