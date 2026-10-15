@@ -24,6 +24,9 @@ const config: Config = {
       animation: {
         spotlight: "spotlight 2s ease .75s 1 forwards",
         aurora: "aurora 60s linear infinite",
+        'laser-scan': 'laserScan 4s ease-in-out infinite',
+        'laser-pulse': 'laserPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'spark-float': 'sparkFloat 3s ease-in-out infinite',
       },
       keyframes: {
         spotlight: {
@@ -40,10 +43,36 @@ const config: Config = {
           from: { backgroundPosition: "50% 50%, 50% 50%" },
           to: { backgroundPosition: "350% 50%, 350% 50%" },
         },
+        laserScan: {
+          '0%, 100%': { transform: 'translateY(-100%)', opacity: '0.1' },
+          '50%': { transform: 'translateY(100%)', opacity: '0.8' },
+        },
+        laserPulse: {
+          '0%, 100%': { opacity: '1', filter: 'drop-shadow(0 0 12px rgba(0,240,255,0.8))' },
+          '50%': { opacity: '0.6', filter: 'drop-shadow(0 0 4px rgba(0,240,255,0.4))' },
+        },
+        sparkFloat: {
+          '0%, 100%': { transform: 'translateY(0) scale(1)', opacity: '0.8' },
+          '50%': { transform: 'translateY(-10px) scale(1.2)', opacity: '1' },
+        },
       },
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
+        laser: {
+          cyan: '#00f0ff',
+          blue: '#0ea5e9',
+          deep: '#0369a1',
+          spark: '#f59e0b',
+          amber: '#ff5500',
+          dark: '#030712',
+          card: '#080d1a',
+          border: 'rgba(0, 240, 255, 0.15)',
+        },
+      },
+      backgroundImage: {
+        'metal-gradient': 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)',
+        'laser-gradient': 'linear-gradient(90deg, #00f0ff 0%, #3b82f6 50%, #00f0ff 100%)',
       },
     },
   },

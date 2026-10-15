@@ -1,90 +1,156 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight, MessageCircle } from 'lucide-react'
-import { Card } from '@/components/ui/card'
-import { Spotlight } from '@/components/ui/spotlight'
+import { MessageCircle, ArrowRight, ShieldCheck, Zap, Layers, Cpu, Box } from 'lucide-react'
+import { LaserCuttingDisplay } from '@/components/laser-cutting-display'
 import { SplineScene } from '@/components/ui/splite'
-import { AuroraBackground } from '@/components/ui/aurora-background'
 
 export function HeroSection() {
+  const [activeTab, setActiveTab] = useState<'simulator' | 'spline'>('simulator')
+
   return (
-    <AuroraBackground className="min-h-screen bg-black">
-      <div id="inicio" className="relative w-full flex items-center justify-center min-h-screen overflow-hidden">
-        <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="amber" />
+    <section id="inicio" className="relative min-h-screen pt-28 pb-20 flex items-center bg-[#030712] overflow-hidden bg-cnc-grid">
+      {/* Background ambient laser glow */}
+      <div className="absolute top-0 left-1/4 w-[600px] h-[500px] bg-cyan-600/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/3 right-10 w-[500px] h-[400px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20 relative z-10">
-          <Card className="w-full bg-black/[0.5] relative overflow-hidden border-gray-800 min-h-[500px] flex flex-col lg:flex-row">
-            {/* Left Content */}
-            <div className="flex-1 p-8 lg:p-12 flex flex-col justify-center relative z-10">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-              >
-                <span className="inline-block text-white text-sm font-medium mb-6">
-                  Fundada em 2009 · São Bernardo do Campo - SP
-                </span>
-              </motion.div>
+      {/* Decorative Crosshair markings */}
+      <div className="absolute top-28 left-8 text-cyan-500/20 font-mono text-[10px] hidden lg:block select-none pointer-events-none">
+        <div>SYS: TUBA-CNC-FIBER</div>
+        <div>AXIS: X/Y/Z REALTIME</div>
+        <div>LOC: SÃO BERNARDO DO CAMPO</div>
+      </div>
 
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight"
-              >
-                TUBA{' '}
-                <span className="text-white">
-                  FERRAMENTARIA
-                </span>
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-gray-100 text-lg mb-8 max-w-lg"
-              >
-                Soluções em corte a laser, dobra e solda. 
-                Qualidade e expertise em metalurgia desde 2009.
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="flex flex-col sm:flex-row gap-4"
-              >
-                <a
-                  href="https://wa.me/5511912854204"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 font-semibold px-6 py-3 rounded-lg transition-colors text-gray-950"
-                  style={{ backgroundColor: '#8fc508' }}
-                >
-                  <MessageCircle className="h-5 w-5" />
-                  Solicite um Orçamento
-                </a>
-                <a
-                  href="#servicos"
-                  className="flex items-center justify-center gap-2 border border-white-700 hover:border-blue-400 text-gray-300 hover:text-blue-300 font-medium px-6 py-3 rounded-lg transition-colors"
-                >
-                  Conheça Nossos Serviços
-                  <ArrowRight className="h-5 w-5" />
-                </a>
-              </motion.div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          {/* Left Hero Content (7 Cols) */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="lg:col-span-6 flex flex-col justify-center"
+          >
+            {/* Tagline Badge */}
+            <div className="inline-flex items-center gap-2 bg-cyan-950/70 border border-cyan-500/40 rounded-full px-4 py-1.5 text-xs font-semibold text-cyan-300 w-fit mb-6 shadow-[0_0_15px_rgba(0,240,255,0.2)]">
+              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+              <span>DESDE 2009 · SÃO BERNARDO DO CAMPO - SP</span>
             </div>
 
-            {/* Right Content - 3D Scene */}
-            <div className="flex-1 min-h-[300px] lg:min-h-[500px] relative">
-              <SplineScene
-                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                className="w-full h-full"
-              />
+            {/* Main Headline */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1] mb-6">
+              Corte a Laser <br />
+              <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500 bg-clip-text text-transparent laser-text-glow">
+                Fibra Óptica
+              </span>{' '}
+              & Dobra CNC
+            </h1>
+
+            {/* Description */}
+            <p className="text-gray-300 text-base sm:text-lg mb-8 leading-relaxed max-w-xl">
+              Especialistas em corte térmico de alta precisão, conformação e caldeiraria industrial. 
+              Garantia de tolerância centesimal, sem rebarbas e entrega ágil para protótipos e grandes lotes seriados.
+            </p>
+
+            {/* Technical Badges in Hero */}
+            <div className="grid grid-cols-3 gap-3 mb-8 max-w-lg">
+              <div className="bg-[#091020] border border-cyan-500/20 rounded-xl p-3 text-center">
+                <div className="text-cyan-400 font-mono font-bold text-sm sm:text-base">12.000W</div>
+                <div className="text-[11px] text-gray-400 font-medium">Laser Fibra</div>
+              </div>
+              <div className="bg-[#091020] border border-cyan-500/20 rounded-xl p-3 text-center">
+                <div className="text-cyan-400 font-mono font-bold text-sm sm:text-base">±0.03mm</div>
+                <div className="text-[11px] text-gray-400 font-medium">Precisão CNC</div>
+              </div>
+              <div className="bg-[#091020] border border-cyan-500/20 rounded-xl p-3 text-center">
+                <div className="text-cyan-400 font-mono font-bold text-sm sm:text-base">3000x1500</div>
+                <div className="text-[11px] text-gray-400 font-medium">Mesa Útil (mm)</div>
+              </div>
             </div>
-          </Card>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-6">
+              <a
+                href="https://wa.me/5511912854204"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2.5 font-bold px-7 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-gray-950 text-sm uppercase tracking-wider shadow-[0_0_30px_rgba(0,240,255,0.4)] transition-all hover:scale-105"
+              >
+                <MessageCircle className="h-5 w-5 fill-gray-950 text-cyan-500" />
+                Solicitar Cotação Imediata
+              </a>
+
+              <a
+                href="#calculadora"
+                className="flex items-center justify-center gap-2 border border-cyan-500/30 hover:border-cyan-400 bg-cyan-950/20 hover:bg-cyan-950/40 text-cyan-200 font-semibold px-6 py-4 rounded-xl text-sm transition-all shadow-sm"
+              >
+                Simular Configuração
+                <ArrowRight className="h-4 w-4 text-cyan-400" />
+              </a>
+            </div>
+
+            {/* Accepted Formats */}
+            <div className="flex items-center gap-2 text-xs text-gray-400 font-mono">
+              <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+              <span>Recebemos: <strong>.DXF · .DWG · .STEP · .IGES · .PDF</strong></span>
+            </div>
+          </motion.div>
+
+          {/* Right Hero (6 Cols) - Interactive CNC Laser Cutter & 3D Model */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="lg:col-span-6 relative"
+          >
+            {/* View Switcher Tabs */}
+            <div className="flex items-center justify-between mb-3 px-1">
+              <div className="flex items-center gap-1 bg-[#090e1c] border border-gray-800 p-1 rounded-xl">
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('simulator')}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                    activeTab === 'simulator'
+                      ? 'bg-cyan-500 text-gray-950 shadow-[0_0_12px_rgba(0,240,255,0.4)]'
+                      : 'text-gray-400 hover:text-white'
+                  }`}
+                >
+                  <Zap className="w-3.5 h-3.5" />
+                  Mesa CNC Interativa
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('spline')}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                    activeTab === 'spline'
+                      ? 'bg-cyan-500 text-gray-950 shadow-[0_0_12px_rgba(0,240,255,0.4)]'
+                      : 'text-gray-400 hover:text-white'
+                  }`}
+                >
+                  <Box className="w-3.5 h-3.5" />
+                  Visualizador 3D
+                </button>
+              </div>
+
+              <span className="text-[11px] font-mono text-cyan-400/80 hidden sm:inline">
+                [60 FPS HARDWARE ACCEL]
+              </span>
+            </div>
+
+            {/* Display Panel */}
+            {activeTab === 'simulator' ? (
+              <LaserCuttingDisplay />
+            ) : (
+              <div className="w-full h-[460px] lg:h-[520px] rounded-2xl overflow-hidden border border-cyan-500/30 bg-[#060a14] relative">
+                <SplineScene
+                  scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                  className="w-full h-full"
+                />
+              </div>
+            )}
+          </motion.div>
         </div>
       </div>
-    </AuroraBackground>
+    </section>
   )
 }
