@@ -20,8 +20,10 @@ interface LaserCuttingDisplayProps {
 export function LaserCuttingDisplay({ isActive = true }: LaserCuttingDisplayProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const containerRef = useRef<HTMLDivElement | null>(null)
+  const coordXRef = useRef<HTMLElement | null>(null)
+  const coordYRef = useRef<HTMLElement | null>(null)
+
   const [interactive, setInteractive] = useState(false)
-  const [coords, setCoords] = useState({ x: 320, y: 180 })
   const [gasType, setGasType] = useState<'N2' | 'O2'>('N2')
 
   useEffect(() => {
@@ -35,35 +37,56 @@ export function LaserCuttingDisplay({ isActive = true }: LaserCuttingDisplayProp
     let width = 0
     let height = 0
 
-    // Set canvas dimensions safely with transform reset
+    // Set canvas dimensions safely with transform reset - ONLY when dimensions actually change
     const resize = () => {
-      if (!container || !canvas) return
-      const rect = container.getBoundingClientRect()
+      if (!container || !canvas || !ctx) return
+
+      // Use clientWidth / offsetWidth to be completely immune to CSS transforms (e.g. Framer Motion scale)
+      const containerW = container.clientWidth || container.offsetWidth || 560
+      const containerH = container.clientHeight || container.offsetHeight || 480
+
+      if (containerW <= 0 || containerH <= 0) return
+
       const dpr = Math.min(window.devicePixelRatio || 1, 2)
-      
-      const targetW = rect.width > 0 ? rect.width : (container.offsetWidth || 560)
-      const targetH = rect.height > 0 ? rect.height : (container.offsetHeight || 480)
+      const targetPixelW = Math.floor(containerW * dpr)
+      const targetPixelH = Math.floor(containerH * dpr)
 
-      if (targetW <= 0 || targetH <= 0) return
-
-      width = targetW
-      height = targetH
-
-      canvas.width = Math.floor(width * dpr)
-      canvas.height = Math.floor(height * dpr)
-      
-      ctx.setTransform(1, 0, 0, 1, 0, 0)
-      ctx.scale(dpr, dpr)
+      // Only update buffer & reset transform if dimensions actually changed!
+      // Assigning canvas.width wipes the canvas bitmap and resets context transform.
+      if (canvas.width !== targetPixelW || canvas.height !== targetPixelH || width !== containerW || height !== containerH) {
+        width = containerW
+        height = containerH
+        canvas.width = targetPixelW
+        canvas.height = targetPixelH
+        ctx.setTransform(1, 0, 0, 1, 0, 0)
+        ctx.scale(dpr, dpr)
+      }
     }
 
+    // Measure initially and on layout stabilization
     resize()
+    requestAnimationFrame(resize)
+    const t1 = setTimeout(resize, 60)
+    const t2 = setTimeout(resize, 250)
 
-    // ResizeObserver ensures that if the tab was hidden and becomes visible, it re-measures instantly!
+    // ResizeObserver ensures that if container size changes, it re-measures
     const resizeObserver = new ResizeObserver(() => {
       resize()
     })
     resizeObserver.observe(container)
     window.addEventListener('resize', resize)
+
+    // GPU context loss recovery
+    const handleContextLost = (e: Event) => {
+      e.preventDefault()
+      cancelAnimationFrame(animationFrameId)
+    }
+    const handleContextRestored = () => {
+      resize()
+      animationFrameId = requestAnimationFrame(render)
+    }
+    canvas.addEventListener('contextlost', handleContextLost)
+    canvas.addEventListener('contextrestored', handleContextRestored)
 
     // Pre-calculate cutting path (An industrial precision flange with gear teeth)
     const points: { x: number; y: number }[] = []
@@ -111,6 +134,15 @@ export function LaserCuttingDisplay({ isActive = true }: LaserCuttingDisplayProp
     let currentPos = { x: cx, y: cy }
     const cutTrail: { x: number; y: number }[] = []
 
+    const updateCoordinateReadout = (x: number, y: number) => {
+      if (coordXRef.current) {
+        coordXRef.current.textContent = `${x.toFixed(1)} mm`
+      }
+      if (coordYRef.current) {
+        coordYRef.current.textContent = `${y.toFixed(1)} mm`
+      }
+    }
+
     const onMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect()
       mousePos = {
@@ -119,7 +151,7 @@ export function LaserCuttingDisplay({ isActive = true }: LaserCuttingDisplayProp
         active: true,
       }
       setInteractive(true)
-      setCoords({ x: Math.round(mousePos.x), y: Math.round(mousePos.y) })
+      updateCoordinateReadout(mousePos.x, mousePos.y)
     }
 
     const onMouseLeave = () => {
@@ -142,17 +174,17 @@ export function LaserCuttingDisplay({ isActive = true }: LaserCuttingDisplayProp
         resize()
       }
 
-      const delta = (time - lastTime) / 1000
+      const delta = Math.min((time - lastTime) / 1000, 0.1)
       lastTime = time
-
-      ctx.clearRect(0, 0, width || 600, height || 480)
 
       const w = width || 600
       const h = height || 480
 
+      ctx.clearRect(0, 0, w, h)
+
       // 1. Draw CNC bed plate with titanium texture
       ctx.fillStyle = '#080d19'
-      ctx.fillRect(15, 15, w - 30, h - 30)
+      ctx.fillRect(15, 15, Math.max(10, w - 30), Math.max(10, h - 30))
 
       // Machine grid
       ctx.strokeStyle = 'rgba(0, 240, 255, 0.08)'
@@ -174,7 +206,7 @@ export function LaserCuttingDisplay({ isActive = true }: LaserCuttingDisplayProp
       // Plate border with fasteners
       ctx.strokeStyle = 'rgba(0, 240, 255, 0.25)'
       ctx.lineWidth = 1.5
-      ctx.strokeRect(15, 15, w - 30, h - 30)
+      ctx.strokeRect(15, 15, Math.max(10, w - 30), Math.max(10, h - 30))
 
       // Clamps in 4 corners
       const clamps = [
@@ -210,18 +242,24 @@ export function LaserCuttingDisplay({ isActive = true }: LaserCuttingDisplayProp
         progress += delta * 0.45
         if (progress >= points.length) progress = 0
 
-        const idx = Math.floor(progress)
+        const idx = Math.floor(progress) % points.length
         const nextIdx = (idx + 1) % points.length
-        const frac = progress - idx
+        const frac = progress - Math.floor(progress)
 
-        const p0 = points[idx]
-        const p1 = points[nextIdx]
+        const p0 = points[idx] || { x: cx, y: cy }
+        const p1 = points[nextIdx] || { x: cx, y: cy }
 
         targetX = centerX + (p0.x - cx + (p1.x - p0.x) * frac) * scale
         targetY = centerY + (p0.y - cy + (p1.y - p0.y) * frac) * scale
 
-        setCoords({ x: Math.round(targetX), y: Math.round(targetY) })
+        updateCoordinateReadout(targetX, targetY)
       }
+
+      // Guard against NaN
+      if (isNaN(targetX)) targetX = centerX
+      if (isNaN(targetY)) targetY = centerY
+      if (isNaN(currentPos.x)) currentPos.x = centerX
+      if (isNaN(currentPos.y)) currentPos.y = centerY
 
       // Smooth laser head interpolation
       currentPos.x += (targetX - currentPos.x) * 0.25
@@ -333,8 +371,12 @@ export function LaserCuttingDisplay({ isActive = true }: LaserCuttingDisplayProp
     animationFrameId = requestAnimationFrame(render)
 
     return () => {
+      clearTimeout(t1)
+      clearTimeout(t2)
       resizeObserver.disconnect()
       window.removeEventListener('resize', resize)
+      canvas.removeEventListener('contextlost', handleContextLost)
+      canvas.removeEventListener('contextrestored', handleContextRestored)
       canvas.removeEventListener('mousemove', onMouseMove)
       canvas.removeEventListener('mouseleave', onMouseLeave)
       cancelAnimationFrame(animationFrameId)
@@ -356,8 +398,8 @@ export function LaserCuttingDisplay({ isActive = true }: LaserCuttingDisplayProp
           <span className="font-semibold tracking-wider">CORTE A LASER CNC</span>
         </div>
         <div className="bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-md border border-gray-800 text-gray-300 flex items-center gap-4">
-          <span>X: <strong className="text-white font-mono">{coords.x.toFixed(1)} mm</strong></span>
-          <span>Y: <strong className="text-white font-mono">{coords.y.toFixed(1)} mm</strong></span>
+          <span>X: <strong ref={coordXRef} className="text-white font-mono">320.0 mm</strong></span>
+          <span>Y: <strong ref={coordYRef} className="text-white font-mono">180.0 mm</strong></span>
           <span className="text-cyan-400 font-semibold">±0.03mm</span>
         </div>
       </div>

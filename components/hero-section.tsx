@@ -8,6 +8,14 @@ import { SplineScene } from '@/components/ui/splite'
 
 export function HeroSection() {
   const [activeTab, setActiveTab] = useState<'simulator' | 'spline'>('simulator')
+  const [hasLoadedSpline, setHasLoadedSpline] = useState(false)
+
+  const handleTabChange = (tab: 'simulator' | 'spline') => {
+    setActiveTab(tab)
+    if (tab === 'spline') {
+      setHasLoadedSpline(true)
+    }
+  }
 
   return (
     <section id="inicio" className="relative min-h-screen pt-28 pb-20 flex items-center bg-[#030712] overflow-hidden bg-cnc-grid">
@@ -106,7 +114,7 @@ export function HeroSection() {
               <div className="flex items-center gap-1 bg-[#090e1c] border border-gray-800 p-1 rounded-xl">
                 <button
                   type="button"
-                  onClick={() => setActiveTab('simulator')}
+                  onClick={() => handleTabChange('simulator')}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                     activeTab === 'simulator'
                       ? 'bg-cyan-500 text-gray-950 shadow-[0_0_12px_rgba(0,240,255,0.4)]'
@@ -118,7 +126,7 @@ export function HeroSection() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setActiveTab('spline')}
+                  onClick={() => handleTabChange('spline')}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                     activeTab === 'spline'
                       ? 'bg-cyan-500 text-gray-950 shadow-[0_0_12px_rgba(0,240,255,0.4)]'
@@ -138,10 +146,12 @@ export function HeroSection() {
 
             <div style={{ display: activeTab === 'spline' ? 'block' : 'none' }}>
               <div className="w-full h-[460px] lg:h-[520px] rounded-2xl overflow-hidden border border-cyan-500/30 bg-[#060a14] relative">
-                <SplineScene
-                  scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                  className="w-full h-full"
-                />
+                {hasLoadedSpline && (
+                  <SplineScene
+                    scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                    className="w-full h-full"
+                  />
+                )}
               </div>
             </div>
           </motion.div>
