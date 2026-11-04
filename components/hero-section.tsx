@@ -1,22 +1,10 @@
 'use client'
 
-import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { MessageCircle, ArrowRight, ShieldCheck, Zap, Box } from 'lucide-react'
+import { MessageCircle, ArrowRight, ShieldCheck, Zap, Crosshair } from 'lucide-react'
 import { LaserCuttingDisplay } from '@/components/laser-cutting-display'
-import { SplineScene } from '@/components/ui/splite'
 
 export function HeroSection() {
-  const [activeTab, setActiveTab] = useState<'simulator' | 'spline'>('simulator')
-  const [hasLoadedSpline, setHasLoadedSpline] = useState(false)
-
-  const handleTabChange = (tab: 'simulator' | 'spline') => {
-    setActiveTab(tab)
-    if (tab === 'spline') {
-      setHasLoadedSpline(true)
-    }
-  }
-
   return (
     <section id="inicio" className="relative min-h-screen pt-28 pb-20 flex items-center bg-[#030712] overflow-hidden bg-cnc-grid">
       {/* Background ambient laser glow */}
@@ -88,10 +76,10 @@ export function HeroSection() {
 
               <a
                 href="#calculadora"
-                className="flex items-center justify-center gap-2 border border-cyan-500/30 hover:border-cyan-400 bg-cyan-950/20 hover:bg-cyan-950/40 text-cyan-200 font-semibold px-6 py-4 rounded-xl text-sm transition-all shadow-sm"
+                className="flex items-center justify-center gap-2 border border-cyan-500/30 hover:border-cyan-400 bg-cyan-950/20 hover:bg-cyan-950/40 text-cyan-200 font-semibold px-6 py-4 rounded-xl text-sm transition-all shadow-sm group"
               >
                 Simular Configuração
-                <ArrowRight className="h-4 w-4 text-cyan-400" />
+                <ArrowRight className="h-4 w-4 text-cyan-400 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
 
@@ -102,57 +90,38 @@ export function HeroSection() {
             </div>
           </motion.div>
 
-          {/* Right Hero (6 Cols) - Interactive CNC Laser Cutter & 3D Model */}
+          {/* Right Hero (6 Cols) - Interactive CNC Laser Cutter Standalone (Cinematic Framing) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="lg:col-span-6 relative"
           >
-            {/* View Switcher Tabs */}
-            <div className="flex items-center justify-between mb-3 px-1">
-              <div className="flex items-center gap-1 bg-[#090e1c] border border-gray-800 p-1 rounded-xl">
-                <button
-                  type="button"
-                  onClick={() => handleTabChange('simulator')}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                    activeTab === 'simulator'
-                      ? 'bg-cyan-500 text-gray-950 shadow-[0_0_12px_rgba(0,240,255,0.4)]'
-                      : 'text-gray-400 hover:text-white'
-                  }`}
-                >
-                  <Zap className="w-3.5 h-3.5" />
-                  Mesa CNC Interativa
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleTabChange('spline')}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                    activeTab === 'spline'
-                      ? 'bg-cyan-500 text-gray-950 shadow-[0_0_12px_rgba(0,240,255,0.4)]'
-                      : 'text-gray-400 hover:text-white'
-                  }`}
-                >
-                  <Box className="w-3.5 h-3.5" />
-                  Visualizador 3D
-                </button>
+            {/* Cinematic HUD Header for the CNC Table */}
+            <div className="flex items-center justify-between mb-3 px-2">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-950/70 border border-cyan-500/30 text-[11px] font-mono text-cyan-300">
+                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping inline-block" />
+                  MESA CNC · TEMPO REAL
+                </span>
+                <span className="text-[11px] font-mono text-gray-500 hidden sm:inline">
+                  TOLERÂNCIA ±0.03mm
+                </span>
+              </div>
+              <div className="flex items-center gap-2 text-[10px] font-mono text-gray-400">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                <span>ONLINE 60 FPS</span>
               </div>
             </div>
 
-            {/* Both views kept in DOM so switching back preserves canvas state and never goes blank */}
-            <div style={{ display: activeTab === 'simulator' ? 'block' : 'none' }}>
-              <LaserCuttingDisplay isActive={activeTab === 'simulator'} />
-            </div>
+            {/* Frame with Corner Reticles */}
+            <div className="relative">
+              <div className="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-cyan-400 z-30 pointer-events-none" />
+              <div className="absolute -top-2 -right-2 w-4 h-4 border-t-2 border-r-2 border-cyan-400 z-30 pointer-events-none" />
+              <div className="absolute -bottom-2 -left-2 w-4 h-4 border-b-2 border-l-2 border-cyan-400 z-30 pointer-events-none" />
+              <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-cyan-400 z-30 pointer-events-none" />
 
-            <div style={{ display: activeTab === 'spline' ? 'block' : 'none' }}>
-              <div className="w-full h-[460px] lg:h-[520px] rounded-2xl overflow-hidden border border-cyan-500/30 bg-[#060a14] relative">
-                {hasLoadedSpline && (
-                  <SplineScene
-                    scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                    className="w-full h-full"
-                  />
-                )}
-              </div>
+              <LaserCuttingDisplay isActive={true} />
             </div>
           </motion.div>
         </div>

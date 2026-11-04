@@ -1,41 +1,53 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Menu, X, MessageCircle, Phone, ArrowUpRight } from 'lucide-react'
+import { Menu, X, MessageCircle, Phone } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useCinematicNavigation } from '@/components/cinematic-curtain'
 
 const navLinks = [
-  { href: '#inicio', label: 'Início' },
-  { href: '#servicos', label: 'Serviços' },
-  { href: '#calculadora', label: 'Simulador' },
-  { href: '#sobre', label: 'Sobre' },
-  { href: '#portfolio', label: 'Portfólio' },
-  { href: '#contato', label: 'Contato' },
+  { href: '#inicio', id: 'inicio', label: 'Início', sector: '01 // INÍCIO · CORTE A LASER' },
+  { href: '#servicos', id: 'servicos', label: 'Serviços', sector: '02 // SERVIÇOS & METALURGIA' },
+  { href: '#calculadora', id: 'calculadora', label: 'Simulador', sector: '03 // SIMULADOR CNC' },
+  { href: '#sobre', id: 'sobre', label: 'Sobre', sector: '04 // HISTÓRIA & CAPACIDADE' },
+  { href: '#portfolio', id: 'portfolio', label: 'Portfólio', sector: '05 // PORTFÓLIO DE PEÇAS' },
+  { href: '#contato', id: 'contato', label: 'Contato', sector: '06 // CONTATO & ENGENHARIA' },
 ]
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const { activeSection, transitionTo } = useCinematicNavigation()
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string, sector: string) => {
+    e.preventDefault()
+    setIsOpen(false)
+    transitionTo(id, sector)
+  }
 
   return (
     <header
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         scrolled
-          ? 'bg-[#030712]/90 backdrop-blur-md border-b border-cyan-500/15 shadow-[0_4px_30px_rgba(0,0,0,0.8)]'
+          ? 'bg-[#030712]/92 backdrop-blur-md border-b border-cyan-500/15 shadow-[0_4px_30px_rgba(0,0,0,0.85)]'
           : 'bg-transparent'
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo with Laser Nozzle Icon */}
-          <a href="#inicio" className="flex items-center gap-3 group">
+          <a
+            href="#inicio"
+            onClick={(e) => handleNavClick(e, 'inicio', '01 // INÍCIO · CORTE A LASER')}
+            className="flex items-center gap-3 group"
+          >
             <div className="p-1.5 rounded-xl bg-cyan-950/70 border border-cyan-500/40 shadow-[0_0_15px_rgba(0,240,255,0.25)] flex items-center justify-center transition-transform group-hover:scale-105">
               <img
                 src="https://i.imgur.com/aHxlYK9.png"
@@ -57,16 +69,28 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-7">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-gray-300 hover:text-cyan-400 transition-colors text-xs uppercase tracking-wider font-semibold relative group py-1"
-              >
-                {link.label}
-                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-cyan-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_#00f0ff]" />
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.id
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={(e) => handleNavClick(e, link.id, link.sector)}
+                  className={cn(
+                    'transition-all text-xs uppercase tracking-wider font-semibold relative py-1',
+                    isActive ? 'text-cyan-300 font-bold' : 'text-gray-300 hover:text-cyan-400'
+                  )}
+                >
+                  {link.label}
+                  <span
+                    className={cn(
+                      'absolute bottom-0 left-0 h-[2px] bg-cyan-400 transition-all duration-300 shadow-[0_0_8px_#00f0ff]',
+                      isActive ? 'w-full' : 'w-0 hover:w-full'
+                    )}
+                  />
+                </a>
+              )
+            })}
           </nav>
 
           {/* Status badge & CTA */}
@@ -106,8 +130,11 @@ export function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="block text-gray-200 hover:text-cyan-400 font-semibold text-sm uppercase tracking-wider py-2 border-b border-gray-800/60"
+                onClick={(e) => handleNavClick(e, link.id, link.sector)}
+                className={cn(
+                  'block font-semibold text-sm uppercase tracking-wider py-2 border-b border-gray-800/60 transition-colors',
+                  activeSection === link.id ? 'text-cyan-300' : 'text-gray-200 hover:text-cyan-400'
+                )}
               >
                 {link.label}
               </a>
