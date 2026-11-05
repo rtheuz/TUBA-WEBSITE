@@ -1,50 +1,36 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Zap, Layers, Flame, Factory, Wrench, FileCode2, ArrowRight } from 'lucide-react'
+import { Zap, Layers, Flame, Factory, FileCode2, ArrowRight, ShieldCheck } from 'lucide-react'
 
 const services = [
   {
     icon: Zap,
-    tag: 'ALTA PRECISÃO',
-    title: 'Corte a Laser',
-    description: 'Corte de alta precisão para aço carbono, aço inoxidável, alumínio e diversos metais com tecnologia avançada. Acabamento limpo, perpendicular e sem rebarbas.',
-    materials: ['Aço Carbono', 'Aço Inox', 'Alumínio e Metais Diversos'],
+    tag: 'ESPESSURAS ATÉ 12MM',
+    title: 'Corte a Laser CNC',
+    description: 'Corte térmico de alta precisão para chapas de aço carbono, aço inoxidável e alumínio com espessura de até 12mm. Bordas limpas, sem rebarbas e precisão centesimal.',
+    materials: ['Aço Carbono (até 12mm)', 'Aço Inox (AISI 304 / 316)', 'Alumínio e Ligas Metálicas'],
   },
   {
     icon: Layers,
     tag: 'CONFORMAÇÃO CNC',
     title: 'Dobra de Chapas CNC',
-    description: 'Dobra precisa de chapas metálicas com repetibilidade geométrica rigorosa. Dobradeiras CNC com ferramentas adequadas para cada raio e ângulo.',
+    description: 'Dobra e conformação precisa de chapas metálicas com repetibilidade geométrica rigorosa. Dobradeiras CNC com ferramentas adequadas para perfis e geometrias técnicas.',
     materials: ['Conformação de Chapas', 'Ângulos e Raios Precisos', 'Repetibilidade Garantida'],
   },
   {
     icon: Flame,
-    tag: 'SOLDA PROFISSIONAL',
-    title: 'Solda Especializada',
-    description: 'Solda profissional para fins estruturais e decorativos com máxima qualidade mecânica, estanqueidade e durabilidade.',
-    materials: ['Solda TIG em Inox', 'Solda MIG/MAG Estrutural', 'Acabamento Refinado'],
+    tag: 'SOLDA ESPECIALIZADA TIG',
+    title: 'Solda Técnica TIG',
+    description: 'Processo de soldagem TIG de alta precisão com acabamento fino, sem respingos e com máxima estanqueidade para componentes em aço inoxidável e ligas especiais.',
+    materials: ['Solda TIG em Aço Inox', 'Soldagem Fina de Precisão', 'Excelente Acabamento Estético'],
   },
   {
     icon: Factory,
-    tag: 'CONJUNTOS INDUSTRIAIS',
-    title: 'Caldeiraria & Montagens',
-    description: 'Construção mecânica e montagem de gabinetes, suportes, tubulações, bases de máquinas e estruturas industriais conforme projeto.',
-    materials: ['Chassis & Gabinetes', 'Estruturas Metálicas', 'Montagens Sob Medida'],
-  },
-  {
-    icon: Wrench,
-    tag: 'SERVIÇOS DE APOIO',
-    title: 'Usinagem & Furação Complementar',
-    description: 'Operações mecânicas de apoio incluindo rosqueamento, chanfros para solda, furos escareados e preparação completa para montagem.',
-    materials: ['Rosqueamento', 'Escareamento', 'Furação Técnica'],
-  },
-  {
-    icon: FileCode2,
-    tag: 'SOFTWARE ESPECIALIZADO',
-    title: 'Engenharia & CAD/CAM',
-    description: 'Otimização computadorizada de aproveitamento de chapa que reduz custos de matéria-prima e agiliza o tempo de produção.',
-    materials: ['Leitura .DXF/.DWG/.STEP', 'Desenvolvimento 3D', 'Aproveitamento Máximo'],
+    tag: 'AJUSTE & MONTAGEM',
+    title: 'Montagem de Conjuntos',
+    description: 'Montagem e união técnica de gabinetes, suportes, caixas de controle e componentes sob medida a partir das peças cortadas, dobradas e soldadas.',
+    materials: ['Gabinetes Técnicos', 'Suportes & Chassi', 'Montagem de Peças Seriadas'],
   },
 ]
 
@@ -67,15 +53,15 @@ export function ServicesSection() {
             Serviços Industriais
           </div>
           <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight mb-4">
-            Nossas Soluções em <span className="text-cyan-400">Corte a Laser & Metalurgia</span>
+            Nossas Soluções em <span className="text-cyan-400">Corte a Laser, Dobra & Solda TIG</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-base">
-            Parque fabril em São Bernardo do Campo preparado para atender rigorosas normas de tolerância, acabamento e prazos.
+            Parque fabril em São Bernardo do Campo preparado para atender rigorosas normas de tolerância, acabamento limpo e prazos industriais.
           </p>
         </motion.div>
 
-        {/* 6 Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* 4 Core Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
@@ -100,10 +86,10 @@ export function ServicesSection() {
                   </div>
 
                   {/* Title & Description */}
-                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+                  <h3 className="text-lg font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                  <p className="text-gray-400 text-xs leading-relaxed mb-6">
                     {service.description}
                   </p>
 
@@ -132,6 +118,42 @@ export function ServicesSection() {
             </motion.div>
           ))}
         </div>
+
+        {/* CAD/CAM & Technical Direct Readout Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="rounded-2xl border border-cyan-500/30 bg-gradient-to-r from-[#070e1c] via-[#091428] to-[#070e1c] p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-[0_0_25px_rgba(0,240,255,0.08)]"
+        >
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-xl bg-cyan-950/90 border border-cyan-400/40 flex items-center justify-center text-cyan-300 shrink-0 shadow-[0_0_15px_rgba(0,240,255,0.25)]">
+              <FileCode2 className="w-6 h-6" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 mb-1">
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span>ENGENHARIA & CAD/CAM INTEGRADO</span>
+              </div>
+              <h4 className="text-white font-bold text-base sm:text-lg">
+                Leitura Direta de Arquivos .DXF, .DWG, .STEP, .IGES e .PDF
+              </h4>
+              <p className="text-gray-400 text-xs sm:text-sm mt-1 max-w-2xl">
+                Otimização computadorizada por nesting para aproveitamento máximo da chapa e redução de desperdício. Corte com limite seguro de até 12mm de espessura.
+              </p>
+            </div>
+          </div>
+
+          <a
+            href="https://wa.me/5511912854204?text=Ol%C3%A1!%20Tenho%20um%20desenho%20t%C3%A9cnico%20e%20gostaria%20de%20uma%20an%C3%A1lise%20de%20corte%20e%20dobra."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-gray-950 font-bold text-xs uppercase tracking-wider whitespace-nowrap shadow-[0_0_20px_rgba(0,240,255,0.3)] transition-all shrink-0 hover:scale-105"
+          >
+            Enviar Desenho p/ Análise
+          </a>
+        </motion.div>
       </div>
     </section>
   )

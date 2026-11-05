@@ -2,27 +2,26 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Calculator, CheckCircle2, MessageCircle, ArrowRight, Sliders } from 'lucide-react'
+import { Calculator, CheckCircle2, MessageCircle, ArrowRight, Sliders, ShieldCheck } from 'lucide-react'
 
 const materials = [
-  { id: 'carbono', name: 'Aço Carbono (1020 / A36)', desc: 'Estrutural, peças mecânicas e bases' },
-  { id: 'inox', name: 'Aço Inox (AISI 304 / 316)', desc: 'Alimentício, químico e acabamento' },
-  { id: 'aluminio', name: 'Alumínio (5052 / Naval)', desc: 'Leveza e resistência à corrosão' },
+  { id: 'carbono', name: 'Aço Carbono (1020 / A36)', desc: 'Peças industriais, perfis e bases até 12mm' },
+  { id: 'inox', name: 'Aço Inox (AISI 304 / 316)', desc: 'Alimentício, químico e acabamento fino' },
+  { id: 'aluminio', name: 'Alumínio (5052 / Naval)', desc: 'Leveza e resistência à oxidação' },
   { id: 'latao', name: 'Latão & Cobre', desc: 'Componentes elétricos e decorativos' },
-  { id: 'galvanizado', name: 'Chapa Galvanizada / ZRC', desc: 'Proteção anticorrosiva' },
+  { id: 'galvanizado', name: 'Chapa Galvanizada / ZRC', desc: 'Proteção anticorrosiva para gabinetes' },
 ]
 
 const thicknesses = [
   '0.8 mm', '1.2 mm', '1.5 mm', '2.0 mm', '3.0 mm',
-  '4.75 mm', '6.35 mm', '9.5 mm', '12.7 mm', 'Sob Consulta'
+  '4.75 mm', '6.35 mm', '8.0 mm', '9.5 mm', '12.0 mm (Máx.)'
 ]
 
 const operations = [
-  { id: 'laser', label: 'Corte a Laser' },
-  { id: 'dobra', label: 'Dobra de Chapas' },
-  { id: 'solda', label: 'Solda TIG / MIG' },
-  { id: 'caldeiraria', label: 'Caldeiraria & Montagem' },
-  { id: 'rosqueamento', label: 'Furação & Rosqueamento' },
+  { id: 'laser', label: 'Corte a Laser (até 12mm)' },
+  { id: 'dobra', label: 'Dobra de Chapas CNC' },
+  { id: 'solda', label: 'Solda Especializada TIG' },
+  { id: 'montagem', label: 'Montagem de Conjuntos' },
 ]
 
 const volumes = [
@@ -59,7 +58,7 @@ export function EstimatorSection() {
 • Espessura: ${selectedThick}
 • Processos: ${selectedOpsLabels}
 • Volume: ${selectedVol}
-Tenho o desenho/arquivo para envio.`
+Tenho o desenho/arquivo técnico (.DXF/.DWG/.STEP/.PDF) para envio.`
     return encodeURIComponent(text)
   }
 
@@ -81,10 +80,10 @@ Tenho o desenho/arquivo para envio.`
             Configurador de Peças Técnicas
           </div>
           <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
-            Simulador de <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500 bg-clip-text text-transparent">Corte & Dobra</span>
+            Simulador de <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500 bg-clip-text text-transparent">Corte, Dobra & Solda TIG</span>
           </h2>
           <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto">
-            Selecione o material, a espessura e os processos do seu projeto para obter atendimento ágil com nossa equipe.
+            Selecione o material, a espessura (até 12mm) e os processos do seu projeto para obter atendimento ágil com nossa equipe técnica.
           </p>
         </motion.div>
 
@@ -101,22 +100,22 @@ Tenho o desenho/arquivo para envio.`
             <div className="bg-[#090e1c] border border-gray-800 rounded-2xl p-6 shadow-xl">
               <label className="text-sm font-semibold text-gray-200 flex items-center gap-2 mb-3">
                 <span className="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold">1</span>
-                Selecione o Material:
+                Tipo de Metal:
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                {materials.map((m) => (
+                {materials.map((mat) => (
                   <button
-                    key={m.id}
+                    key={mat.id}
                     type="button"
-                    onClick={() => setSelectedMat(m)}
-                    className={`text-left p-3 rounded-xl border transition-all text-xs font-medium flex flex-col gap-1 ${
-                      selectedMat.id === m.id
-                        ? 'border-cyan-400 bg-cyan-950/40 text-white shadow-[0_0_15px_rgba(0,240,255,0.2)]'
-                        : 'border-gray-800/80 bg-gray-900/40 text-gray-400 hover:border-gray-700 hover:text-gray-200'
+                    onClick={() => setSelectedMat(mat)}
+                    className={`text-left p-3.5 rounded-xl border transition-all text-xs flex flex-col justify-between ${
+                      selectedMat.id === mat.id
+                        ? 'border-cyan-400 bg-cyan-950/40 text-cyan-200 shadow-[0_0_15px_rgba(0,240,255,0.2)]'
+                        : 'border-gray-800 bg-gray-900/30 text-gray-400 hover:border-gray-700'
                     }`}
                   >
-                    <span className="font-semibold text-white">{m.name}</span>
-                    <span className="text-[11px] text-cyan-400/80">{m.desc}</span>
+                    <span className="font-bold text-white mb-1">{mat.name}</span>
+                    <span className="text-[11px] text-gray-500">{mat.desc}</span>
                   </button>
                 ))}
               </div>
@@ -124,10 +123,15 @@ Tenho o desenho/arquivo para envio.`
 
             {/* Step 2: Thickness */}
             <div className="bg-[#090e1c] border border-gray-800 rounded-2xl p-6 shadow-xl">
-              <label className="text-sm font-semibold text-gray-200 flex items-center gap-2 mb-3">
-                <span className="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold">2</span>
-                Espessura Desejada:
-              </label>
+              <div className="flex items-center justify-between mb-3">
+                <label className="text-sm font-semibold text-gray-200 flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold">2</span>
+                  Espessura da Chapa:
+                </label>
+                <span className="text-[11px] font-mono text-cyan-400 bg-cyan-950/60 border border-cyan-500/30 px-2.5 py-0.5 rounded-full">
+                  CAPACIDADE: ATÉ 12MM
+                </span>
+              </div>
               <div className="flex flex-wrap gap-2">
                 {thicknesses.map((th) => (
                   <button
@@ -150,7 +154,7 @@ Tenho o desenho/arquivo para envio.`
             <div className="bg-[#090e1c] border border-gray-800 rounded-2xl p-6 shadow-xl">
               <label className="text-sm font-semibold text-gray-200 flex items-center gap-2 mb-3">
                 <span className="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold">3</span>
-                Processos Desejados:
+                Processos Solicitados:
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 {operations.map((op) => {
@@ -162,7 +166,7 @@ Tenho o desenho/arquivo para envio.`
                       onClick={() => toggleOp(op.id)}
                       className={`text-left p-3 rounded-xl border transition-all text-xs font-medium flex items-center justify-between ${
                         active
-                          ? 'border-cyan-400/80 bg-cyan-950/30 text-white'
+                          ? 'border-cyan-400/80 bg-cyan-950/30 text-white shadow-[0_0_10px_rgba(0,240,255,0.15)]'
                           : 'border-gray-800 bg-gray-900/30 text-gray-400 hover:border-gray-700'
                       }`}
                     >
@@ -218,62 +222,55 @@ Tenho o desenho/arquivo para envio.`
                   <Sliders className="w-5 h-5 text-cyan-400" />
                   <span className="font-bold text-white text-base">Especificação Técnica</span>
                 </div>
-                <span className="text-[11px] font-mono text-cyan-400 bg-cyan-950/60 border border-cyan-500/30 px-2 py-0.5 rounded">
-                  PRONTO P/ COTAÇÃO
+                <span className="text-[10px] font-mono bg-cyan-950 border border-cyan-500/30 px-2 py-0.5 rounded text-cyan-300">
+                  TUBA CNC
                 </span>
               </div>
 
-              <div className="space-y-4 py-6 font-mono text-xs">
-                <div className="flex justify-between items-center py-1.5 border-b border-gray-800/60">
-                  <span className="text-gray-400">Material Base:</span>
-                  <span className="text-white font-semibold text-right">{selectedMat.name}</span>
+              <div className="py-5 space-y-4 font-mono text-xs border-b border-gray-800">
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-400">Material:</span>
+                  <span className="text-white font-bold text-right">{selectedMat.name}</span>
                 </div>
-
-                <div className="flex justify-between items-center py-1.5 border-b border-gray-800/60">
+                <div className="flex justify-between items-center">
                   <span className="text-gray-400">Espessura:</span>
-                  <span className="text-cyan-300 font-bold">{selectedThick}</span>
+                  <span className="text-cyan-400 font-bold">{selectedThick}</span>
                 </div>
-
-                <div className="flex justify-between items-start py-1.5 border-b border-gray-800/60">
+                <div className="flex justify-between items-start gap-2">
                   <span className="text-gray-400">Processos:</span>
-                  <span className="text-white text-right max-w-[200px] font-sans font-medium text-xs leading-tight">
-                    {selectedOpsLabels}
-                  </span>
+                  <span className="text-white font-bold text-right max-w-[200px]">{selectedOpsLabels}</span>
                 </div>
-
-                <div className="flex justify-between items-center py-1.5 border-b border-gray-800/60">
-                  <span className="text-gray-400">Lote Proposto:</span>
-                  <span className="text-gray-200">{selectedVol}</span>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-400">Volume:</span>
+                  <span className="text-white font-bold">{selectedVol}</span>
                 </div>
-
-                <div className="flex justify-between items-center py-1.5">
-                  <span className="text-gray-400">Tolerância:</span>
-                  <span className="text-emerald-400 font-semibold">Centesimal Conforme Projeto</span>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-400">Tolerância Fabril:</span>
+                  <span className="text-emerald-400 font-bold">±0.03 mm</span>
                 </div>
               </div>
 
-              <div className="bg-cyan-950/30 border border-cyan-500/20 rounded-xl p-3 text-[11px] text-gray-300 mb-6 leading-relaxed">
-                <strong className="text-cyan-300">Aceitamos arquivos CAD:</strong> .DXF, .DWG, .STEP ou croqui em .PDF com cotas.
+              {/* Technical Capacity Note */}
+              <div className="my-4 p-3 rounded-xl bg-cyan-950/40 border border-cyan-500/20 text-[11px] text-gray-300 flex items-start gap-2">
+                <ShieldCheck className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                <span>Corte de alta precisão até 12mm de espessura, conformação CNC e solda especializada TIG.</span>
               </div>
 
-              {/* Direct WhatsApp Action */}
-              <a
-                href={`https://wa.me/5511912854204?text=${buildQuoteMessage()}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-gray-950 font-bold text-sm flex items-center justify-center gap-2.5 shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all hover:scale-[1.02] cursor-pointer"
-              >
-                <MessageCircle className="w-5 h-5 fill-gray-950 text-cyan-500" />
-                Cotar esta Configuração no WhatsApp
-              </a>
-
-              <a
-                href="#contato"
-                className="w-full mt-3 py-2.5 px-4 rounded-xl border border-gray-700 hover:border-cyan-400/50 bg-black/40 text-gray-300 hover:text-white text-xs font-semibold flex items-center justify-center gap-2 transition-colors"
-              >
-                Ou preencher formulário detalhado
-                <ArrowRight className="w-3.5 h-3.5" />
-              </a>
+              {/* Action Button */}
+              <div className="pt-2">
+                <a
+                  href={`https://wa.me/5511912854204?text=${buildQuoteMessage()}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-gray-950 font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2.5 shadow-[0_0_25px_rgba(0,240,255,0.4)] transition-all hover:scale-[1.02]"
+                >
+                  <MessageCircle className="w-5 h-5 fill-gray-950 text-cyan-500" />
+                  Enviar Especificação no WhatsApp
+                </a>
+                <p className="text-center text-[11px] text-gray-500 mt-3 font-mono">
+                  Atendimento direto com a Engenharia · Retorno ágil
+                </p>
+              </div>
             </div>
           </motion.div>
         </div>

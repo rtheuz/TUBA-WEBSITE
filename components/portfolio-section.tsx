@@ -61,7 +61,7 @@ const portfolioData: PortfolioItem[] = [
     category: 'estrutural',
     material: 'Aço Estrutural ASTM A36',
     tolerancia: '±0.08 mm',
-    processo: 'Corte a Laser + Caldeiraria Pesada',
+    processo: 'Corte a Laser + Montagem Estrutural',
   },
   {
     src: '/portfolio/letras-musica-inox.webp',
@@ -85,7 +85,7 @@ const portfolioData: PortfolioItem[] = [
     category: 'dobra',
     material: 'Aço Cromado / Polido',
     tolerancia: '±0.05 mm',
-    processo: 'Corte a Laser + Furação + Conformação',
+    processo: 'Corte a Laser + Dobra CNC de Precisão',
   },
 ]
 
@@ -125,7 +125,7 @@ export function PortfolioSection() {
             { id: 'all', label: 'Todos os Projetos' },
             { id: 'laser', label: 'Corte a Laser' },
             { id: 'dobra', label: 'Dobra CNC' },
-            { id: 'estrutural', label: 'Conjuntos & Caldeiraria' },
+            { id: 'estrutural', label: 'Conjuntos & Montagem' },
           ].map((tab) => (
             <button
               key={tab.id}

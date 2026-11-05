@@ -53,12 +53,12 @@ export function HeroSection() {
                 <div className="text-[11px] text-gray-400 font-medium">Tolerância Centesimal</div>
               </div>
               <div className="bg-[#091020] border border-cyan-500/20 rounded-xl p-3 text-center">
-                <div className="text-cyan-400 font-mono font-bold text-sm sm:text-base">Corte & Dobra</div>
-                <div className="text-[11px] text-gray-400 font-medium">Soluções Completas</div>
+                <div className="text-cyan-400 font-mono font-bold text-sm sm:text-base">Corte até 12mm</div>
+                <div className="text-[11px] text-gray-400 font-medium">Dobra & Nesting CNC</div>
               </div>
               <div className="bg-[#091020] border border-cyan-500/20 rounded-xl p-3 text-center">
-                <div className="text-cyan-400 font-mono font-bold text-sm sm:text-base">Sob Medida</div>
-                <div className="text-[11px] text-gray-400 font-medium">Protótipos & Séries</div>
+                <div className="text-cyan-400 font-mono font-bold text-sm sm:text-base">Solda TIG</div>
+                <div className="text-[11px] text-gray-400 font-medium">Montagem de Peças</div>
               </div>
             </div>
 

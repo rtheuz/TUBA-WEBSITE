@@ -43,7 +43,7 @@ export function Footer() {
             </div>
 
             <p className="text-gray-400 leading-relaxed max-w-md text-xs sm:text-sm">
-              TUBA FERRAMENTARIA LTDA — Soluções integradas de corte a laser de alta potência, dobra CNC multi-eixos, solda qualificada e caldeiraria industrial desde 2009.
+              TUBA FERRAMENTARIA LTDA — Soluções integradas de corte a laser (até 12mm), dobra CNC multi-eixos, solda especializada TIG e montagem de conjuntos desde 2009.
             </p>
 
             <div className="flex gap-3 pt-2">

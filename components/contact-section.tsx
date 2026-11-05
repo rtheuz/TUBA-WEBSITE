@@ -236,7 +236,7 @@ ${form.description || 'Gostaria de cotar peças em corte a laser / dobra.'}${fil
                     name="description"
                     value={form.description}
                     onChange={handleChange}
-                    placeholder="Descreva quantidade de peças, espessura da chapa, se requer dobra ou solda, ou envie dúvidas técnicas..."
+                    placeholder="Descreva quantidade de peças, espessura da chapa (até 12mm), se requer dobra, solda TIG ou montagem de conjuntos..."
                     rows={4}
                     className="w-full bg-[#060a14] border border-gray-700 rounded-xl px-3.5 py-2.5 text-white placeholder-gray-500 text-xs focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all resize-none"
                   />
